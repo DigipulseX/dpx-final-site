@@ -4,202 +4,229 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Pulse X | Premium Agency</title>
-    <!-- Tailwind for modern styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
         
         :root {
-            --brand-primary: #6366f1;
-            --brand-secondary: #a855f7;
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --dark: #050505;
+            --card-bg: #111111;
         }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #ffffff;
+            background-color: var(--dark);
+            color: #ffffff;
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
-        .font-heading { font-family: 'Space Grotesk', sans-serif; }
+        /* Modern Background Glow */
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% -20%, #1e1b4b 0%, transparent 50%),
+                        radial-gradient(circle at 0% 100%, #1e1b4b 0%, transparent 40%);
+            z-index: -1;
+        }
 
         .gradient-text {
-            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .glass-nav {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .hero-mesh {
-            background-color: #ffffff;
-            background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-                              radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
-                              radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
-            background-attachment: fixed;
+        .premium-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .card-shadow {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(0,0,0,0.05);
+        .premium-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.3);
         }
 
-        .card-shadow:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px -12px rgba(99, 102, 241, 0.15);
-            border-color: rgba(99, 102, 241, 0.3);
+        .glow-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .glow-button:hover {
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+            transform: scale(1.05);
+        }
+
+        .glow-button:active {
+            transform: scale(0.95);
+        }
+
+        .price-badge {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
+            border: 1px solid rgba(99, 102, 241, 0.2);
         }
 
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            z-index: 1000;
+            z-index: 100;
             background: #25d366;
-            color: white;
-            width: 65px;
-            height: 65px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 35px;
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
-            animation: bounceCustom 2s infinite;
-        }
-
-        @keyframes bounceCustom {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
+            font-size: 30px;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
         }
     </style>
 </head>
-<body class="antialiased selection:bg-indigo-100 selection:text-indigo-600">
+<body>
 
-    <!-- Floating WhatsApp -->
-    <a href="https://wa.me/923024405533" target="_blank" class="whatsapp-float hover:scale-110 transition-all">
+    <div class="bg-glow"></div>
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/923024405533" target="_blank" class="whatsapp-float glow-button">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Navigation -->
+    <!-- Navbar -->
     <nav class="glass-nav fixed w-full z-50 top-0">
-        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-            <div class="text-2xl font-bold font-heading tracking-tighter flex items-center gap-2">
-                <div class="w-8 h-8 bg-indigo-600 rounded-lg"></div>
-                DIGITAL<span class="text-indigo-600">PULSEX</span>
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-black tracking-tighter">
+                DIGITAL<span class="text-indigo-500 italic">PULSEX</span>
             </div>
             
-            <div class="hidden md:flex space-x-10 text-sm font-bold uppercase tracking-widest text-slate-500">
-                <a href="#" class="hover:text-indigo-600 transition">Home</a>
-                <a href="#services" class="hover:text-indigo-600 transition">Solutions</a>
-                <a href="#contact" class="hover:text-indigo-600 transition">Contact</a>
+            <div class="hidden md:flex space-x-8 text-sm font-bold tracking-widest uppercase">
+                <a href="#" class="hover:text-indigo-400 transition">Home</a>
+                <a href="#services" class="hover:text-indigo-400 transition">Services</a>
+                <a href="#pricing" class="hover:text-indigo-400 transition">Pricing</a>
             </div>
 
-            <a href="https://wa.me/923024405533" target="_blank" class="bg-indigo-600 text-white px-8 py-3 rounded-full font-bold text-sm hover:bg-indigo-700 transition shadow-lg shadow-indigo-200">
+            <a href="https://wa.me/923024405533" target="_blank" class="glow-button bg-indigo-600 text-white px-7 py-2.5 rounded-full font-bold text-sm shadow-lg">
                 HIRE ME
             </a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative pt-48 pb-32 px-6 overflow-hidden">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 opacity-5">
-            <div class="absolute top-0 left-0 w-96 h-96 bg-indigo-600 blur-[120px] rounded-full"></div>
-            <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-600 blur-[120px] rounded-full"></div>
-        </div>
-
-        <div class="max-w-6xl mx-auto text-center">
-            <h1 class="font-heading text-6xl md:text-8xl font-bold text-slate-900 mb-8 leading-tight tracking-tighter">
-                Accelerate Your <br>
-                <span class="gradient-text">Digital Authority</span>
+    <section class="pt-48 pb-32 px-6">
+        <div class="max-w-5xl mx-auto text-center">
+            <h1 class="text-6xl md:text-8xl font-extrabold mb-8 tracking-tighter leading-tight">
+                Modern Brands Need <br>
+                <span class="gradient-text italic">Modern Strategy.</span>
             </h1>
-            <p class="text-xl text-slate-500 mb-12 max-w-2xl mx-auto leading-relaxed">
-                We craft data-driven strategies for SEO, Meta Ads, and Premium Web Experiences that turn visitors into loyal customers.
+            <p class="text-gray-400 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
+                SEO, Ads, aur High-End Development ka combination. Hum aapke pulse ko digital world mein vibrate karwaenge.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
-                <a href="https://wa.me/923024405533" target="_blank" class="w-full sm:w-auto bg-slate-900 text-white px-12 py-5 rounded-2xl font-bold text-lg hover:bg-slate-800 transition shadow-2xl">
-                    Get Free Audit
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <a href="https://wa.me/923024405533" class="glow-button bg-white text-black px-10 py-4 rounded-2xl font-black text-lg">
+                    START PROJECT
                 </a>
-                <a href="#services" class="w-full sm:w-auto px-12 py-5 rounded-2xl font-bold text-lg border border-slate-200 hover:bg-slate-50 transition">
-                    Our Services
+                <a href="#pricing" class="glow-button bg-transparent border border-gray-700 px-10 py-4 rounded-2xl font-black text-lg hover:bg-white/5">
+                    VIEW PLANS
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-32 bg-slate-50/50">
+    <!-- Services -->
+    <section id="services" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+            <div class="premium-card p-10 rounded-[2.5rem]">
+                <div class="text-4xl text-indigo-500 mb-6"><i class="fas fa-bolt"></i></div>
+                <h3 class="text-2xl font-bold mb-4">Fast SEO</h3>
+                <p class="text-gray-500">Google rankings mein tezi se izafa aur organic customers ki line.</p>
+            </div>
+            <div class="premium-card p-10 rounded-[2.5rem]">
+                <div class="text-4xl text-purple-500 mb-6"><i class="fas fa-bullseye"></i></div>
+                <h3 class="text-2xl font-bold mb-4">Ads Mastery</h3>
+                <p class="text-gray-500">Meta aur Google Ads jo sirf paise nahi, sales generate karein.</p>
+            </div>
+            <div class="premium-card p-10 rounded-[2.5rem]">
+                <div class="text-4xl text-pink-500 mb-6"><i class="fas fa-code"></i></div>
+                <h3 class="text-2xl font-bold mb-4">UI Architecture</h3>
+                <p class="text-gray-500">Aesa design jo aapke competitors ko purana dikhaye.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-32 bg-white/5">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-20">
-                <div class="max-w-xl">
-                    <h2 class="font-heading text-4xl md:text-5xl font-bold mb-6 italic">Premium <span class="text-indigo-600">Solutions</span></h2>
-                    <p class="text-slate-500 text-lg">Helping businesses scale in the modern digital landscape.</p>
-                </div>
-                <div class="mt-8 md:mt-0 font-bold text-indigo-600 tracking-widest uppercase text-sm">Scroll to explore</div>
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-6xl font-bold mb-4">Simple <span class="gradient-text">Pricing</span></h2>
+                <p class="text-gray-500">Koi hidden charges nahi, sirf results.</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- SEO -->
-                <div class="card-shadow bg-white p-12 rounded-[2.5rem]">
-                    <div class="text-4xl text-indigo-600 mb-8"><i class="fas fa-chart-line"></i></div>
-                    <h3 class="font-heading text-2xl font-bold mb-4">Search Mastery</h3>
-                    <p class="text-slate-500 leading-relaxed mb-8">Dominating Google rankings through technical SEO and strategic content placement.</p>
-                    <div class="h-1 w-12 bg-indigo-100 rounded-full"></div>
+                <!-- Basic -->
+                <div class="premium-card p-10 rounded-[3rem] relative overflow-hidden">
+                    <div class="text-sm font-bold tracking-widest text-indigo-400 mb-4 uppercase">Basic Start</div>
+                    <div class="text-5xl font-black mb-8">$199<span class="text-lg text-gray-600">/mo</span></div>
+                    <ul class="space-y-4 mb-10 text-gray-400">
+                        <li><i class="fas fa-check text-indigo-500 mr-2"></i> SEO Audit</li>
+                        <li><i class="fas fa-check text-indigo-500 mr-2"></i> Social Media Setup</li>
+                        <li><i class="fas fa-check text-indigo-500 mr-2"></i> 2 Ads Campaigns</li>
+                    </ul>
+                    <a href="https://wa.me/923024405533" class="block text-center bg-white/10 py-4 rounded-2xl font-bold hover:bg-white text-black transition">Choose Basic</a>
                 </div>
 
-                <!-- Advertising -->
-                <div class="card-shadow bg-white p-12 rounded-[2.5rem]">
-                    <div class="text-4xl text-purple-600 mb-8"><i class="fas fa-bullseye"></i></div>
-                    <h3 class="font-heading text-2xl font-bold mb-4">Paid Performance</h3>
-                    <p class="text-slate-500 leading-relaxed mb-8">High-ROAS Meta & Google ads campaigns that drive immediate revenue growth.</p>
-                    <div class="h-1 w-12 bg-purple-100 rounded-full"></div>
+                <!-- Standard -->
+                <div class="premium-card p-10 rounded-[3rem] border-indigo-500 scale-105 shadow-2xl bg-indigo-600/5">
+                    <div class="absolute top-6 right-8 text-xs font-black bg-indigo-600 px-3 py-1 rounded-full">POPULAR</div>
+                    <div class="text-sm font-bold tracking-widest text-indigo-400 mb-4 uppercase">Grow Pro</div>
+                    <div class="text-5xl font-black mb-8">$499<span class="text-lg text-gray-600">/mo</span></div>
+                    <ul class="space-y-4 mb-10 text-gray-300">
+                        <li><i class="fas fa-check text-indigo-500 mr-2"></i> Full Monthly SEO</li>
+                        <li><i class="fas fa-check text-indigo-500 mr-2"></i> Meta & Google Ads</li>
+                        <li><i class="fas fa-check text-indigo-500 mr-2"></i> Content Creation</li>
+                        <li><i class="fas fa-check text-indigo-500 mr-2"></i> Weekly Reporting</li>
+                    </ul>
+                    <a href="https://wa.me/923024405533" class="block text-center bg-indigo-600 py-4 rounded-2xl font-bold glow-button">Most Popular</a>
                 </div>
 
-                <!-- UI/UX -->
-                <div class="card-shadow bg-white p-12 rounded-[2.5rem]">
-                    <div class="text-4xl text-pink-600 mb-8"><i class="fas fa-layer-group"></i></div>
-                    <h3 class="font-heading text-2xl font-bold mb-4">Web Architecture</h3>
-                    <p class="text-slate-500 leading-relaxed mb-8">Clean, fast, and conversion-optimized websites that represent your brand luxury.</p>
-                    <div class="h-1 w-12 bg-pink-100 rounded-full"></div>
+                <!-- Premium -->
+                <div class="premium-card p-10 rounded-[3rem]">
+                    <div class="text-sm font-bold tracking-widest text-indigo-400 mb-4 uppercase">Elite Scale</div>
+                    <div class="text-5xl font-black mb-8">$999<span class="text-lg text-gray-600">/mo</span></div>
+                    <ul class="space-y-4 mb-10 text-gray-400">
+                        <li><i class="fas fa-check text-indigo-500 mr-2"></i> Custom Web App</li>
+                        <li><i class="fas fa-check text-indigo-500 mr-2"></i> Unlimited Ad Support</li>
+                        <li><i class="fas fa-check text-indigo-500 mr-2"></i> Dedicated Manager</li>
+                        <li><i class="fas fa-check text-indigo-500 mr-2"></i> PR & Growth Hacks</li>
+                    </ul>
+                    <a href="https://wa.me/923024405533" class="block text-center bg-white/10 py-4 rounded-2xl font-bold hover:bg-white text-black transition">Go Elite</a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section id="contact" class="py-32 px-6">
-        <div class="max-w-5xl mx-auto bg-slate-900 rounded-[3rem] p-12 md:p-24 text-center relative overflow-hidden shadow-2xl">
-            <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 blur-[100px]"></div>
-            
-            <h2 class="font-heading text-4xl md:text-6xl font-bold text-white mb-8">Ready to Start?</h2>
-            <p class="text-slate-400 text-lg mb-12 max-w-lg mx-auto">Discuss your project requirements with us and get a custom strategy today.</p>
-            
-            <a href="https://wa.me/923024405533" target="_blank" class="inline-flex items-center gap-4 bg-white text-slate-900 px-12 py-6 rounded-2xl font-black text-xl hover:scale-105 transition shadow-xl">
-                <i class="fab fa-whatsapp text-[#25d366]"></i>
-                WHATSAPP CHAT
-            </a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 px-6 border-t border-slate-100">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-            <div class="text-xl font-black font-heading tracking-tighter italic">
-                DIGITAL<span class="text-indigo-600">PULSEX</span>
-            </div>
-            <p class="text-slate-400 text-sm font-medium">© 2026 DIGITAL PULSE X. ALL RIGHTS RESERVED.</p>
-            <div class="flex gap-6 text-slate-300">
-                <a href="#" class="hover:text-indigo-600 transition"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="hover:text-indigo-600 transition"><i class="fab fa-instagram"></i></a>
-                <a href="https://wa.me/923024405533" class="hover:text-indigo-600 transition"><i class="fab fa-whatsapp"></i></a>
-            </div>
+    <footer class="py-20 text-center border-t border-white/5">
+        <div class="text-xl font-black mb-6 italic">DIGITAL PULSE X</div>
+        <div class="flex justify-center gap-6 mb-8 text-gray-500">
+            <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="hover:text-white"><i class="fab fa-linkedin"></i></a>
+            <a href="https://wa.me/923024405533" class="hover:text-white"><i class="fab fa-whatsapp"></i></a>
         </div>
+        <p class="text-gray-600 text-sm tracking-widest uppercase">&copy; 2026 Crafted for Professional Brands</p>
     </footer>
 
 </body>
