@@ -3,365 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigipulseX | Rana Khalid - Growth Agency</title>
+    <title>DigipulseX | Entry Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&family=Plus+Jakarta+Sans:wght@800&display=swap');
         
         :root {
-            --primary: #6366f1;
-            --cyan: #22d3ee;
-            --dark: #020617;
-            --whatsapp: #25d366;
+            --cyan-glow: #22d3ee;
+            --deep-space: #020617;
         }
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--dark);
-            color: #ffffff;
-            scroll-behavior: smooth;
-            overflow-x: hidden;
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--deep-space);
+            color: white;
+            overflow: hidden;
         }
 
-        .bg-glow {
+        /* --- PORTAL STYLES --- */
+        #portal-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
-                        radial-gradient(circle at 20% 80%, rgba(34, 211, 238, 0.1) 0%, transparent 40%);
+            inset: 0;
+            z-index: 9999;
+            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 1s cubic-bezier(0.87, 0, 0.13, 1);
+        }
+
+        /* Futuristic Background Grid */
+        .grid-bg {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background-image: 
+                linear-gradient(rgba(34, 211, 238, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34, 211, 238, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(500px) rotateX(60deg);
+            animation: grid-move 20s linear infinite;
             z-index: -1;
         }
 
-        .glass-card {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        @keyframes grid-move {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
         }
 
-        .glass-card:hover {
-            border-color: var(--cyan);
-            box-shadow: 0 20px 40px rgba(34, 211, 238, 0.15);
-            transform: translateY(-5px);
-        }
-
-        .btn-primary {
-            background: linear-gradient(90deg, #22d3ee, #6366f1);
-            box-shadow: 0 10px 20px rgba(34, 211, 238, 0.3);
-            transition: all 0.3s ease;
-        }
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(34, 211, 238, 0.5);
-        }
-
-        /* Floating WhatsApp Button */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 65px;
-            height: 65px;
-            background-color: var(--whatsapp);
-            color: white;
-            border-radius: 50%;
-            text-align: center;
-            font-size: 35px;
-            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
-            z-index: 999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            animation: pulse-wa 2s infinite;
-        }
-
-        @keyframes pulse-wa {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1) rotate(10deg);
-            background-color: #20ba5a;
-        }
-
-        .whatsapp-badge {
+        .scan-line {
             position: absolute;
-            top: -2px;
-            right: -2px;
-            background: #ff3e3e;
-            color: white;
-            font-size: 10px;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
+            width: 100%;
+            height: 2px;
+            background: rgba(34, 211, 238, 0.3);
+            box-shadow: 0 0 15px var(--cyan-glow);
+            top: 0;
+            animation: scan 4s linear infinite;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        @keyframes scan {
+            0% { top: -10%; }
+            100% { top: 110%; }
+        }
+
+        .portal-logo-container {
+            text-align: center;
+            animation: emerge 1.2s ease-out;
+        }
+
+        @keyframes emerge {
+            from { opacity: 0; transform: scale(0.8) translateY(30px); filter: blur(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        }
+
+        .brand-name {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+            background: linear-gradient(to bottom, #fff 30%, var(--cyan-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(34, 211, 238, 0.4));
+        }
+
+        /* Sci-Fi Buttons */
+        .sci-fi-btn {
+            position: relative;
+            padding: 18px 45px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--cyan-glow);
+            background: rgba(34, 211, 238, 0.05);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+            transition: all 0.4s;
+            cursor: pointer;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            border: 2px solid var(--dark);
+            gap: 15px;
         }
 
-        .live-dot {
-            width: 8px; height: 8px;
-            background-color: #22d3ee;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 8px;
-            box-shadow: 0 0 10px #22d3ee;
-            animation: pulse-dot 1.5s infinite;
+        .sci-fi-btn:hover {
+            background: var(--cyan-glow);
+            color: black;
+            box-shadow: 0 0 50px rgba(34, 211, 238, 0.6);
+            transform: translateY(-3px);
         }
 
-        @keyframes pulse-dot {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(1.3); }
-            100% { opacity: 1; transform: scale(1); }
+        /* --- MAIN SITE TRIGGER --- */
+        .portal-hidden {
+            transform: scale(1.5);
+            opacity: 0;
+            pointer-events: none;
         }
 
-        #notification-toast {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            z-index: 10000;
-            transform: translateX(-150%);
-            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        #main-app {
+            opacity: 0;
+            transition: opacity 1s ease 0.5s;
         }
-        #notification-toast.active { transform: translateX(0); }
 
-        .custom-modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(2, 6, 23, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 9999;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+        .app-visible {
+            opacity: 1 !important;
         }
-        .custom-modal.active { display: flex; }
-
-        .form-input {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            width: 100%; padding: 14px;
-            border-radius: 12px; outline: none; color: white;
-            transition: border 0.3s;
-        }
-        .form-input:focus { border-color: var(--cyan); }
     </style>
 </head>
 <body>
 
-    <div class="bg-glow"></div>
+    <!-- PORTAL PAGE -->
+    <div id="portal-overlay">
+        <div class="grid-bg"></div>
+        <div class="scan-line"></div>
 
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/923024405533" target="_blank" class="whatsapp-float">
-        <i class="fab fa-whatsapp"></i>
-        <span class="whatsapp-badge">1</span>
-    </a>
-
-    <!-- Live Notifications -->
-    <div id="notification-toast">
-        <div class="glass-card flex items-center gap-4 p-4 rounded-2xl border-l-4 border-l-cyan-400 min-w-[300px]">
-            <div class="w-10 h-10 bg-cyan-500/20 rounded-full flex items-center justify-center text-cyan-400">
-                <i class="fas fa-shopping-cart"></i>
+        <div class="portal-logo-container">
+            <div class="mb-4 inline-block p-4 rounded-2xl bg-cyan-500/10 border border-cyan-500/20">
+                <i class="fas fa-bolt text-5xl text-cyan-400 animate-pulse"></i>
             </div>
-            <div>
-                <p id="notif-text" class="text-xs font-bold text-white">Someone just ordered Growth Plan</p>
-                <p class="text-[10px] text-gray-500 uppercase tracking-tighter">Verified by DigipulseX</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Booking Modal -->
-    <div id="booking-modal" class="custom-modal">
-        <div class="glass-card max-w-lg w-full p-10 rounded-[40px] relative border border-cyan-500/30 cursor-default">
-            <button onclick="toggleModal('booking-modal')" class="absolute top-8 right-8 text-gray-400 hover:text-white">
-                <i class="fas fa-times text-xl"></i>
-            </button>
-            <h3 class="text-3xl font-black mb-2 uppercase tracking-tighter text-cyan-400">Schedule Audit</h3>
-            <p class="text-gray-400 text-sm mb-8">Hamari team aap se WhatsApp par rabta karegi.</p>
+            <h1 class="brand-name mb-2">Digipulse<span class="text-white">X</span></h1>
+            <p class="text-cyan-400/60 font-bold tracking-[0.4em] text-[10px] uppercase mb-16">Establishing Secure Growth Connection...</p>
             
-            <form onsubmit="event.preventDefault(); alert('Booking Successful! We will contact you soon.'); toggleModal('booking-modal');" class="space-y-5">
-                <input type="text" placeholder="Full Name" class="form-input" required>
-                <input type="tel" placeholder="WhatsApp Number" class="form-input" required>
-                <select class="form-input">
-                    <option>Scale Pro (Ads)</option>
-                    <option>Branding (Identity)</option>
-                    <option>SEO (Visibility)</option>
-                </select>
-                <button type="submit" class="w-full btn-primary py-4 rounded-xl font-black uppercase text-sm tracking-widest">Book My Slot</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Team Member Modal -->
-    <div id="team-modal" class="custom-modal">
-        <div class="glass-card max-w-md w-full p-10 rounded-[40px] relative border border-cyan-500/30 text-center">
-            <button onclick="toggleModal('team-modal')" class="absolute top-8 right-8 text-gray-400 hover:text-white">
-                <i class="fas fa-times text-xl"></i>
-            </button>
-            <div id="member-icon" class="w-24 h-24 rounded-full mx-auto mb-6 flex items-center justify-center text-4xl font-black border-2 border-cyan-500/30 shadow-[0_0_30px_rgba(34,211,238,0.2)]"></div>
-            <h3 id="member-name" class="text-3xl font-black text-white"></h3>
-            <p id="member-role" class="text-cyan-400 font-bold uppercase tracking-widest text-xs mt-2 mb-6"></p>
-            <p id="member-bio" class="text-gray-400 leading-relaxed mb-8 text-sm"></p>
-            
-            <div class="flex gap-3">
-                <button id="chat-whatsapp-btn" class="flex-1 py-4 bg-green-600/20 border border-green-500/30 rounded-2xl font-bold hover:bg-green-500 hover:text-white transition-all">
-                    <i class="fab fa-whatsapp mr-2"></i> WhatsApp
+            <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+                <button onclick="unlockRealm()" class="sci-fi-btn group">
+                    <span>Initialize DigipulseX</span>
+                    <i class="fas fa-chevron-right text-[10px] group-hover:translate-x-2 transition-transform"></i>
                 </button>
-                <button onclick="openLiveChat()" class="flex-1 py-4 bg-white/5 border border-white/10 rounded-2xl font-bold hover:bg-cyan-500 hover:text-white transition-all">
-                    <i class="fas fa-comments mr-2"></i> Live Chat
+                
+                <button onclick="window.open('https://wa.me/923024405533', '_blank')" class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-white transition-colors flex items-center gap-2">
+                    <i class="fab fa-whatsapp"></i>
+                    Bypass to Commander
                 </button>
             </div>
         </div>
+
+        <div class="absolute bottom-10 left-10 flex gap-10 opacity-20 text-[10px] font-mono">
+            <div>LAT: 32.2642° N</div>
+            <div>LONG: 74.2237° E</div>
+            <div>STATION: KAMOKE_PK</div>
+        </div>
     </div>
 
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 top-0 bg-slate-950/60 backdrop-blur-lg border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-black tracking-tighter flex items-center gap-2">
-                <i class="fas fa-bolt text-cyan-400"></i>
-                <span>DIGIPULSE<span class="text-cyan-400">X</span></span>
+    <!-- MAIN WEBSITE CONTENT -->
+    <div id="main-app">
+        <!-- I am reusing the high-quality layout from your most recent App.jsx/OneFile.jsx logic -->
+        <nav class="fixed w-full z-50 top-0 p-6 flex justify-between items-center bg-slate-950/50 backdrop-blur-xl">
+            <div class="flex items-center gap-2 font-black text-xl tracking-tighter">
+                <i class="fas fa-bolt text-cyan-400"></i> DIGIPULSEX
             </div>
-            <div class="hidden md:flex gap-8 items-center text-[11px] font-bold tracking-widest uppercase">
-                <a href="#team" class="hover:text-cyan-400 transition">Team</a>
-                <a href="#pricing" class="hover:text-cyan-400 transition">Pricing</a>
-                <a href="#faq" class="hover:text-cyan-400 transition">FAQ</a>
-                <button onclick="openLiveChat()" class="btn-primary px-6 py-2.5 rounded-full text-white flex items-center">
-                    <span class="live-dot"></span> Online Now
-                </button>
+            <div class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest">
+                <a href="#services" class="hover:text-cyan-400">Solutions</a>
+                <a href="#results" class="hover:text-cyan-400">Metrics</a>
+                <a href="#contact" class="hover:text-cyan-400 text-cyan-400">Get Quote</a>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    <!-- Hero Section -->
-    <section class="pt-44 pb-24 px-6 text-center overflow-hidden">
-        <div class="container mx-auto">
-            <div class="inline-block px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 text-[10px] font-black uppercase tracking-[0.3em] mb-8">
-                Premium Growth Agency
-            </div>
-            <h1 class="text-6xl md:text-8xl font-black mb-8 tracking-tighter leading-[0.9] uppercase">
-                Dominating the <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-500">Digital Realm.</span>
-            </h1>
-            <p class="text-gray-400 text-lg mb-12 max-w-2xl mx-auto italic">"E-commerce Brands ke liye ROI Machine." - Rana Khalid</p>
-            <div class="flex flex-wrap justify-center gap-5">
-                <button onclick="toggleModal('booking-modal')" class="btn-primary px-12 py-5 rounded-2xl font-black text-sm tracking-widest">GET FREE AUDIT</button>
-                <a href="https://wa.me/923024405533" target="_blank" class="px-12 py-5 rounded-2xl border border-white/10 font-black text-sm tracking-widest hover:bg-white hover:text-black transition-all">WHATSAPP US</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Team Section -->
-    <section id="team" class="py-24 px-6 container mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-black uppercase tracking-tighter mb-4">Our <span class="text-cyan-400">Leadership</span></h2>
-            <p class="text-gray-500 text-xs font-bold uppercase tracking-[0.3em]">Direct access to top specialists</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div onclick="showMember('RK', 'Rana Khalid', 'Founder & CEO', 'Leading growth strategies for 50+ international brands.')" class="glass-card p-10 rounded-[40px] text-center cursor-pointer">
-                <div class="w-20 h-20 bg-cyan-500/20 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl font-black text-cyan-400 border border-cyan-500/30">RK</div>
-                <h4 class="text-xl font-bold">Rana Khalid</h4>
-                <p class="text-cyan-400 text-[10px] font-bold uppercase tracking-widest">Founder</p>
-            </div>
-            
-            <div onclick="showMember('AM', 'Ali Murad', 'Performance Expert', 'Handling over $100k+ in monthly ad spend.')" class="glass-card p-10 rounded-[40px] text-center cursor-pointer">
-                <div class="w-20 h-20 bg-purple-500/20 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl font-black text-purple-400 border border-purple-500/30">AM</div>
-                <h4 class="text-xl font-bold">Ali Murad</h4>
-                <p class="text-purple-400 text-[10px] font-bold uppercase tracking-widest">Media Buyer</p>
-            </div>
-
-            <div onclick="showMember('SA', 'Sarah Ahmed', 'Creative Lead', 'Specializing in high-converting visual assets.')" class="glass-card p-10 rounded-[40px] text-center cursor-pointer">
-                <div class="w-20 h-20 bg-pink-500/20 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl font-black text-pink-400 border border-pink-500/30">SA</div>
-                <h4 class="text-xl font-bold">Sarah Ahmed</h4>
-                <p class="text-pink-400 text-[10px] font-bold uppercase tracking-widest">Creative</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section id="pricing" class="py-24 px-6 bg-slate-950/50">
-        <div class="container mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-black uppercase tracking-tighter mb-4">Investment <span class="text-cyan-400">Plans</span></h2>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Basic -->
-                <div class="glass-card p-10 rounded-[40px] flex flex-col">
-                    <h4 class="text-xl font-bold mb-2">Growth</h4>
-                    <div class="text-4xl font-black mb-6">$499<span class="text-sm text-gray-500">/mo</span></div>
-                    <ul class="space-y-4 mb-10 text-sm text-gray-400 flex-1">
-                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Ads Management</li>
-                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Basic Funnel</li>
-                    </ul>
-                    <button onclick="toggleModal('booking-modal')" class="w-full py-4 border border-white/10 rounded-2xl font-bold uppercase text-xs tracking-widest hover:bg-white hover:text-black transition-all">Get Growth</button>
-                </div>
-
-                <!-- Pro -->
-                <div class="glass-card p-10 rounded-[40px] border-2 border-cyan-500 relative bg-slate-900/80 shadow-2xl md:scale-105">
-                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[10px] font-black px-4 py-1 rounded-full">POPULAR</div>
-                    <h4 class="text-xl font-bold mb-2">Scale Pro</h4>
-                    <div class="text-4xl font-black mb-6">$999<span class="text-sm text-gray-500">/mo</span></div>
-                    <ul class="space-y-4 mb-10 text-sm text-gray-300 font-semibold">
-                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Ads + Creative</li>
-                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Retention Marketing</li>
-                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Dedicated Manager</li>
-                    </ul>
-                    <button onclick="toggleModal('booking-modal')" class="w-full py-4 btn-primary rounded-2xl font-black uppercase text-xs tracking-widest">Scale Now</button>
-                </div>
-
-                <!-- Custom -->
-                <div class="glass-card p-10 rounded-[40px] flex flex-col">
-                    <h4 class="text-xl font-bold mb-2">Enterprise</h4>
-                    <div class="text-4xl font-black mb-6">Custom</div>
-                    <ul class="space-y-4 mb-10 text-sm text-gray-400 flex-1">
-                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Full Ecosystem</li>
-                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> In-person Audit</li>
-                    </ul>
-                    <button onclick="openLiveChat()" class="w-full py-4 border border-white/10 rounded-2xl font-bold uppercase text-xs tracking-widest hover:bg-white hover:text-black transition-all">Contact Us</button>
+        <section class="min-h-screen flex flex-col justify-center items-center px-6 text-center">
+            <div class="max-w-4xl">
+                <span class="text-cyan-400 font-mono text-xs tracking-[0.5em] uppercase mb-6 block">Mission: Exponential Growth</span>
+                <h2 class="text-6xl md:text-8xl font-black mb-8 leading-none tracking-tighter">
+                    WE SCALE <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-600">BRANDS</span> <br> BEYOND LIMITS.
+                </h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto mb-12">
+                    DigipulseX is more than an agency. We are the architects of your digital future, using advanced marketing protocols to ensure market dominance.
+                </p>
+                <div class="flex gap-4 justify-center">
+                    <button class="bg-cyan-500 text-black px-10 py-5 rounded-full font-black uppercase text-xs tracking-widest hover:scale-105 transition">Deploy Campaign</button>
+                    <button class="border border-white/10 px-10 py-5 rounded-full font-black uppercase text-xs tracking-widest hover:bg-white/5 transition">View Protocols</button>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="py-24 px-6 container mx-auto max-w-4xl">
-        <h2 class="text-3xl font-black uppercase tracking-tighter mb-12 text-center">Frequently Asked <span class="text-cyan-400">Questions</span></h2>
-        <div class="space-y-4">
-            <details class="glass-card p-6 rounded-3xl cursor-pointer group">
-                <summary class="font-bold flex justify-between items-center list-none">
-                    Kia main monthly cancel kr skta ho?
-                    <i class="fas fa-plus text-cyan-400 group-open:rotate-45 transition-transform"></i>
-                </summary>
-                <p class="mt-4 text-gray-400 text-sm">Ji bilkul, hamara koi lamba contract nahi hota. Results bolte hain hamari jagah.</p>
-            </details>
-            <details class="glass-card p-6 rounded-3xl cursor-pointer group">
-                <summary class="font-bold flex justify-between items-center list-none">
-                    Result ki guarantee kia hai?
-                    <i class="fas fa-plus text-cyan-400 group-open:rotate-45 transition-transform"></i>
-                </summary>
-                <p class="mt-4 text-gray-400 text-sm">Hamara focus ROI par hota hai. Agar humein lage ke hum aapka brand grow nahi kr skte, hum project nahi letay.</p>
-            </details>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-24 px-6 border-t border-white/5 bg-slate-950 text-center">
-        <div class="text-3xl font-black mb-8 tracking-tighter">DIGIPULSE<span class="text-cyan-400">X</span></div>
-        <div class="flex justify-center gap-8 mb-12 text-gray-500 uppercase text-[10px] font-black tracking-widest">
-            <a href="#team" class="hover:text-cyan-400">Team</a>
-            <a href="#pricing" class="hover:text-cyan-400">Plans</a>
-            <a href="#faq" class="hover:text-cyan-400">Help</a>
-        </div>
-        <p class="text-[10px] text-gray-700 font-black uppercase tracking-[0.5em]">© 2026 RANA KHALID | BUILT FOR SCALE</p>
-    </footer>
+        <!-- Metrics -->
+        <section id="results" class="py-20 container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="p-10 bg-slate-900/50 border border-white/5 rounded-[40px] text-center">
+                    <div class="text-5xl font-black text-cyan-400 mb-2">5.4X</div>
+                    <div class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Average ROAS</div>
+                </div>
+                <div class="p-10 bg-slate-900/50 border border-white/5 rounded-[40px] text-center">
+                    <div class="text-5xl font-black text-purple-400 mb-2">$2M+</div>
+                    <div class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Revenue Generated</div>
+                </div>
+                <div class="p-10 bg-slate-900/50 border border-white/5 rounded-[40px] text-center">
+                    <div class="text-5xl font-black text-white mb-2">24/7</div>
+                    <div class="text-[10px] font-bold uppercase tracking-widest text-slate-500">System Monitoring</div>
+                </div>
+            </div>
+        </section>
+        
+        <footer class="py-20 text-center border-t border-white/5 text-slate-600 text-[10px] font-bold uppercase tracking-[1em]">
+            DigipulseX © 2026 | Developed by Rana Khalid
+        </footer>
+    </div>
 
     <script>
-        // Tawk.to Live Chat
+        function unlockRealm() {
+            const portal = document.getElementById('portal-overlay');
+            const main = document.getElementById('main-app');
+            
+            // Start the fade out
+            portal.classList.add('portal-hidden');
+            
+            // Show main site
+            setTimeout(() => {
+                portal.style.display = 'none';
+                main.classList.add('app-visible');
+                document.body.style.overflow = 'auto'; // Re-enable scrolling
+            }, 1000);
+        }
+
+        // Tawk.to Integration
         var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
         (function(){
             var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
@@ -371,39 +249,6 @@
             s1.setAttribute('crossorigin','*');
             s0.parentNode.insertBefore(s1,s0);
         })();
-
-        // Modal Logic
-        function toggleModal(id) {
-            document.getElementById(id).classList.toggle('active');
-        }
-
-        function showMember(icon, name, role, bio) {
-            document.getElementById('member-icon').innerText = icon;
-            document.getElementById('member-name').innerText = name;
-            document.getElementById('member-role').innerText = role;
-            document.getElementById('member-bio').innerText = bio;
-            const waBtn = document.getElementById('chat-whatsapp-btn');
-            waBtn.onclick = () => window.open(`https://wa.me/923024405533?text=Hi ${name}, I saw you on DigipulseX.`, '_blank');
-            toggleModal('team-modal');
-        }
-
-        function openLiveChat() {
-            if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) Tawk_API.maximize();
-            else window.open('https://tawk.to/chat/67a3666b825083258e100e12/1ij9p02gq', '_blank');
-        }
-
-        // Live Notifications
-        const notifs = ["Ahmed just booked an audit!", "ROAS 5.2x achieved for local client!", "New Growth Strategy session started", "2 spots left for February!"];
-        setInterval(() => {
-            const toast = document.getElementById('notification-toast');
-            document.getElementById('notif-text').innerText = notifs[Math.floor(Math.random()*notifs.length)];
-            toast.classList.add('active');
-            setTimeout(() => toast.classList.remove('active'), 5000);
-        }, 15000);
-
-        window.onclick = function(e) {
-            if (e.target.className.includes('custom-modal')) e.target.classList.remove('active');
-        }
     </script>
 </body>
 </html>
