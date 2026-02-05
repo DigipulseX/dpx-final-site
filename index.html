@@ -13,6 +13,7 @@
             --primary: #6366f1;
             --cyan: #22d3ee;
             --dark: #020617;
+            --whatsapp: #25d366;
         }
 
         body {
@@ -41,6 +42,7 @@
         .glass-card:hover {
             border-color: var(--cyan);
             box-shadow: 0 20px 40px rgba(34, 211, 238, 0.15);
+            transform: translateY(-5px);
         }
 
         .btn-primary {
@@ -51,6 +53,56 @@
         .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 30px rgba(34, 211, 238, 0.5);
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            background-color: var(--whatsapp);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 35px;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            animation: pulse-wa 2s infinite;
+        }
+
+        @keyframes pulse-wa {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(10deg);
+            background-color: #20ba5a;
+        }
+
+        .whatsapp-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: #ff3e3e;
+            color: white;
+            font-size: 10px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 2px solid var(--dark);
         }
 
         .live-dot {
@@ -77,9 +129,7 @@
             transform: translateX(-150%);
             transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
-        #notification-toast.active {
-            transform: translateX(0);
-        }
+        #notification-toast.active { transform: translateX(0); }
 
         .custom-modal {
             display: none;
@@ -102,16 +152,17 @@
             transition: border 0.3s;
         }
         .form-input:focus { border-color: var(--cyan); }
-
-        .price-card.featured {
-            border: 2px solid var(--cyan);
-            transform: scale(1.05);
-        }
     </style>
 </head>
 <body>
 
     <div class="bg-glow"></div>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/923024405533" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-badge">1</span>
+    </a>
 
     <!-- Live Notifications -->
     <div id="notification-toast">
@@ -133,24 +184,24 @@
                 <i class="fas fa-times text-xl"></i>
             </button>
             <h3 class="text-3xl font-black mb-2 uppercase tracking-tighter text-cyan-400">Schedule Audit</h3>
-            <p class="text-gray-400 text-sm mb-8">Slot book karein, Rana Khalid ki team rabta karegi.</p>
+            <p class="text-gray-400 text-sm mb-8">Hamari team aap se WhatsApp par rabta karegi.</p>
             
-            <form onsubmit="event.preventDefault(); alert('Booking Received! We will contact you on WhatsApp.'); toggleModal('booking-modal');" class="space-y-5">
+            <form onsubmit="event.preventDefault(); alert('Booking Successful! We will contact you soon.'); toggleModal('booking-modal');" class="space-y-5">
                 <input type="text" placeholder="Full Name" class="form-input" required>
                 <input type="tel" placeholder="WhatsApp Number" class="form-input" required>
                 <select class="form-input">
-                    <option>Ads Management</option>
-                    <option>SEO Services</option>
-                    <option>Social Media Growth</option>
+                    <option>Scale Pro (Ads)</option>
+                    <option>Branding (Identity)</option>
+                    <option>SEO (Visibility)</option>
                 </select>
-                <button type="submit" class="w-full btn-primary py-4 rounded-xl font-black uppercase text-sm tracking-widest">Confirm Booking</button>
+                <button type="submit" class="w-full btn-primary py-4 rounded-xl font-black uppercase text-sm tracking-widest">Book My Slot</button>
             </form>
         </div>
     </div>
 
     <!-- Team Member Modal -->
     <div id="team-modal" class="custom-modal">
-        <div class="glass-card max-w-md w-full p-10 rounded-[40px] relative border border-cyan-500/30 text-center cursor-default">
+        <div class="glass-card max-w-md w-full p-10 rounded-[40px] relative border border-cyan-500/30 text-center">
             <button onclick="toggleModal('team-modal')" class="absolute top-8 right-8 text-gray-400 hover:text-white">
                 <i class="fas fa-times text-xl"></i>
             </button>
@@ -178,25 +229,29 @@
                 <span>DIGIPULSE<span class="text-cyan-400">X</span></span>
             </div>
             <div class="hidden md:flex gap-8 items-center text-[11px] font-bold tracking-widest uppercase">
-                <a href="#team" class="hover:text-cyan-400 transition">Our People</a>
+                <a href="#team" class="hover:text-cyan-400 transition">Team</a>
                 <a href="#pricing" class="hover:text-cyan-400 transition">Pricing</a>
                 <a href="#faq" class="hover:text-cyan-400 transition">FAQ</a>
                 <button onclick="openLiveChat()" class="btn-primary px-6 py-2.5 rounded-full text-white flex items-center">
-                    <span class="live-dot"></span> Let's Talk
+                    <span class="live-dot"></span> Online Now
                 </button>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-44 pb-24 px-6 text-center">
+    <section class="pt-44 pb-24 px-6 text-center overflow-hidden">
         <div class="container mx-auto">
+            <div class="inline-block px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 text-[10px] font-black uppercase tracking-[0.3em] mb-8">
+                Premium Growth Agency
+            </div>
             <h1 class="text-6xl md:text-8xl font-black mb-8 tracking-tighter leading-[0.9] uppercase">
-                Scale Your <br> <span class="text-cyan-400">Business.</span>
+                Dominating the <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-500">Digital Realm.</span>
             </h1>
-            <p class="text-gray-400 text-lg mb-12 max-w-2xl mx-auto italic">"Hamara maqsad aapke brand ko zero se hero banana hai." - Rana Khalid</p>
+            <p class="text-gray-400 text-lg mb-12 max-w-2xl mx-auto italic">"E-commerce Brands ke liye ROI Machine." - Rana Khalid</p>
             <div class="flex flex-wrap justify-center gap-5">
-                <button onclick="toggleModal('booking-modal')" class="btn-primary px-12 py-5 rounded-2xl font-black text-sm">BOOK FREE AUDIT</button>
+                <button onclick="toggleModal('booking-modal')" class="btn-primary px-12 py-5 rounded-2xl font-black text-sm tracking-widest">GET FREE AUDIT</button>
+                <a href="https://wa.me/923024405533" target="_blank" class="px-12 py-5 rounded-2xl border border-white/10 font-black text-sm tracking-widest hover:bg-white hover:text-black transition-all">WHATSAPP US</a>
             </div>
         </div>
     </section>
@@ -204,75 +259,70 @@
     <!-- Team Section -->
     <section id="team" class="py-24 px-6 container mx-auto">
         <div class="text-center mb-16">
-            <h2 class="text-4xl font-black uppercase tracking-tighter mb-4">The <span class="text-cyan-400">Experts</span></h2>
-            <p class="text-gray-500 text-xs font-bold uppercase tracking-[0.3em]">Direct contact with our specialists</p>
+            <h2 class="text-4xl font-black uppercase tracking-tighter mb-4">Our <span class="text-cyan-400">Leadership</span></h2>
+            <p class="text-gray-500 text-xs font-bold uppercase tracking-[0.3em]">Direct access to top specialists</p>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div onclick="showMember('RK', 'Rana Khalid', 'Founder & CEO', '5+ years experience scaling E-commerce brands. Expert in Growth Systems.')" class="glass-card p-10 rounded-[40px] text-center cursor-pointer hover:scale-105 transition-all">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div onclick="showMember('RK', 'Rana Khalid', 'Founder & CEO', 'Leading growth strategies for 50+ international brands.')" class="glass-card p-10 rounded-[40px] text-center cursor-pointer">
                 <div class="w-20 h-20 bg-cyan-500/20 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl font-black text-cyan-400 border border-cyan-500/30">RK</div>
                 <h4 class="text-xl font-bold">Rana Khalid</h4>
-                <p class="text-cyan-400 text-[10px] font-bold uppercase tracking-widest mt-1">Founder & CEO</p>
+                <p class="text-cyan-400 text-[10px] font-bold uppercase tracking-widest">Founder</p>
             </div>
             
-            <div onclick="showMember('AM', 'Ali Murad', 'Ads Specialist', 'Certified Meta Ads Expert. Specialist in dropshipping ROAS optimization.')" class="glass-card p-10 rounded-[40px] text-center cursor-pointer hover:scale-105 transition-all">
+            <div onclick="showMember('AM', 'Ali Murad', 'Performance Expert', 'Handling over $100k+ in monthly ad spend.')" class="glass-card p-10 rounded-[40px] text-center cursor-pointer">
                 <div class="w-20 h-20 bg-purple-500/20 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl font-black text-purple-400 border border-purple-500/30">AM</div>
                 <h4 class="text-xl font-bold">Ali Murad</h4>
-                <p class="text-purple-400 text-[10px] font-bold uppercase tracking-widest mt-1">Ads Specialist</p>
+                <p class="text-purple-400 text-[10px] font-bold uppercase tracking-widest">Media Buyer</p>
             </div>
 
-            <div onclick="showMember('SA', 'Sarah Ahmed', 'UI/UX Lead', 'Creating high-converting landing pages that double your sales.')" class="glass-card p-10 rounded-[40px] text-center cursor-pointer hover:scale-105 transition-all">
+            <div onclick="showMember('SA', 'Sarah Ahmed', 'Creative Lead', 'Specializing in high-converting visual assets.')" class="glass-card p-10 rounded-[40px] text-center cursor-pointer">
                 <div class="w-20 h-20 bg-pink-500/20 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl font-black text-pink-400 border border-pink-500/30">SA</div>
                 <h4 class="text-xl font-bold">Sarah Ahmed</h4>
-                <p class="text-pink-400 text-[10px] font-bold uppercase tracking-widest mt-1">UI/UX Designer</p>
+                <p class="text-pink-400 text-[10px] font-bold uppercase tracking-widest">Creative</p>
             </div>
         </div>
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="py-24 px-6 bg-slate-900/30">
+    <section id="pricing" class="py-24 px-6 bg-slate-950/50">
         <div class="container mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-black uppercase tracking-tighter mb-4">Pricing <span class="text-cyan-400">Plans</span></h2>
-                <p class="text-gray-500 text-xs font-bold uppercase tracking-[0.3em]">Simple plans for massive growth</p>
+                <h2 class="text-4xl font-black uppercase tracking-tighter mb-4">Investment <span class="text-cyan-400">Plans</span></h2>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Basic -->
-                <div class="glass-card p-10 rounded-[40px] border border-white/5 flex flex-col">
+                <div class="glass-card p-10 rounded-[40px] flex flex-col">
                     <h4 class="text-xl font-bold mb-2">Growth</h4>
-                    <div class="text-4xl font-black mb-6">$499<span class="text-sm text-gray-500 font-normal">/mo</span></div>
+                    <div class="text-4xl font-black mb-6">$499<span class="text-sm text-gray-500">/mo</span></div>
                     <ul class="space-y-4 mb-10 text-sm text-gray-400 flex-1">
-                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Social Media Management</li>
-                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Basic Ads Strategy</li>
-                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Weekly Reports</li>
+                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Ads Management</li>
+                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Basic Funnel</li>
                     </ul>
-                    <button onclick="toggleModal('booking-modal')" class="w-full py-4 border border-white/10 rounded-2xl font-bold hover:bg-white hover:text-black transition-all text-sm uppercase">Get Started</button>
+                    <button onclick="toggleModal('booking-modal')" class="w-full py-4 border border-white/10 rounded-2xl font-bold uppercase text-xs tracking-widest hover:bg-white hover:text-black transition-all">Get Growth</button>
                 </div>
 
-                <!-- Featured -->
-                <div class="glass-card p-10 rounded-[40px] border-2 border-cyan-500 relative transform md:scale-110 shadow-2xl bg-slate-900 flex flex-col">
-                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[10px] font-black px-4 py-1 rounded-full uppercase">Most Popular</div>
+                <!-- Pro -->
+                <div class="glass-card p-10 rounded-[40px] border-2 border-cyan-500 relative bg-slate-900/80 shadow-2xl md:scale-105">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[10px] font-black px-4 py-1 rounded-full">POPULAR</div>
                     <h4 class="text-xl font-bold mb-2">Scale Pro</h4>
-                    <div class="text-4xl font-black mb-6">$999<span class="text-sm text-gray-500 font-normal">/mo</span></div>
-                    <ul class="space-y-4 mb-10 text-sm text-gray-200 flex-1 font-semibold">
-                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Full Ads Management</li>
-                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Content Creation (15 Posts)</li>
-                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Sales Funnel Design</li>
-                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> 24/7 Priority Support</li>
+                    <div class="text-4xl font-black mb-6">$999<span class="text-sm text-gray-500">/mo</span></div>
+                    <ul class="space-y-4 mb-10 text-sm text-gray-300 font-semibold">
+                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Ads + Creative</li>
+                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Retention Marketing</li>
+                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Dedicated Manager</li>
                     </ul>
-                    <button onclick="toggleModal('booking-modal')" class="w-full py-4 btn-primary rounded-2xl font-black text-sm uppercase">Choose Pro</button>
+                    <button onclick="toggleModal('booking-modal')" class="w-full py-4 btn-primary rounded-2xl font-black uppercase text-xs tracking-widest">Scale Now</button>
                 </div>
 
-                <!-- Enterprise -->
-                <div class="glass-card p-10 rounded-[40px] border border-white/5 flex flex-col">
+                <!-- Custom -->
+                <div class="glass-card p-10 rounded-[40px] flex flex-col">
                     <h4 class="text-xl font-bold mb-2">Enterprise</h4>
                     <div class="text-4xl font-black mb-6">Custom</div>
                     <ul class="space-y-4 mb-10 text-sm text-gray-400 flex-1">
-                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Full Brand Ecosystem</li>
-                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Unlimited Ad Spend Mgmt</li>
-                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Dedicated Account Manager</li>
+                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Full Ecosystem</li>
+                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> In-person Audit</li>
                     </ul>
-                    <button onclick="openLiveChat()" class="w-full py-4 border border-white/10 rounded-2xl font-bold hover:bg-white hover:text-black transition-all text-sm uppercase">Contact Sales</button>
+                    <button onclick="openLiveChat()" class="w-full py-4 border border-white/10 rounded-2xl font-bold uppercase text-xs tracking-widest hover:bg-white hover:text-black transition-all">Contact Us</button>
                 </div>
             </div>
         </div>
@@ -280,60 +330,34 @@
 
     <!-- FAQ Section -->
     <section id="faq" class="py-24 px-6 container mx-auto max-w-4xl">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-black uppercase tracking-tighter mb-4">Common <span class="text-cyan-400">Questions</span></h2>
-        </div>
+        <h2 class="text-3xl font-black uppercase tracking-tighter mb-12 text-center">Frequently Asked <span class="text-cyan-400">Questions</span></h2>
         <div class="space-y-4">
-            <details class="glass-card p-6 rounded-2xl cursor-pointer group">
+            <details class="glass-card p-6 rounded-3xl cursor-pointer group">
                 <summary class="font-bold flex justify-between items-center list-none">
-                    Result kab tak milenge?
-                    <i class="fas fa-chevron-down text-cyan-400 transition-transform group-open:rotate-180"></i>
+                    Kia main monthly cancel kr skta ho?
+                    <i class="fas fa-plus text-cyan-400 group-open:rotate-45 transition-transform"></i>
                 </summary>
-                <p class="mt-4 text-gray-400 text-sm leading-relaxed">Pehle 14 dino mein hum data analyze karte hain. Results usually 30-45 dino mein stable hona shuru ho jate hain.</p>
+                <p class="mt-4 text-gray-400 text-sm">Ji bilkul, hamara koi lamba contract nahi hota. Results bolte hain hamari jagah.</p>
             </details>
-            <details class="glass-card p-6 rounded-2xl cursor-pointer group">
+            <details class="glass-card p-6 rounded-3xl cursor-pointer group">
                 <summary class="font-bold flex justify-between items-center list-none">
-                    Ads Budget kitna hona chahiye?
-                    <i class="fas fa-chevron-down text-cyan-400 transition-transform group-open:rotate-180"></i>
+                    Result ki guarantee kia hai?
+                    <i class="fas fa-plus text-cyan-400 group-open:rotate-45 transition-transform"></i>
                 </summary>
-                <p class="mt-4 text-gray-400 text-sm leading-relaxed">Hum recommend karte hain ke kam az kam $10-$20 per day se start karein taake pixel ko acha data mil sake.</p>
+                <p class="mt-4 text-gray-400 text-sm">Hamara focus ROI par hota hai. Agar humein lage ke hum aapka brand grow nahi kr skte, hum project nahi letay.</p>
             </details>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-24 px-6 border-t border-white/5 bg-slate-950">
-        <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-            <div class="col-span-1 md:col-span-2">
-                <div class="text-3xl font-black mb-6 tracking-tighter">DIGIPULSE<span class="text-cyan-400">X</span></div>
-                <p class="text-gray-500 max-w-sm mb-6 uppercase text-[10px] font-bold tracking-widest leading-loose">
-                    Rana Khalid's premium agency focusing on high-ticket client acquisition and e-commerce scaling.
-                </p>
-                <div class="flex gap-4">
-                    <a href="#" class="w-10 h-10 bg-white/5 flex items-center justify-center rounded-full hover:bg-cyan-500 hover:text-black transition-all"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="w-10 h-10 bg-white/5 flex items-center justify-center rounded-full hover:bg-cyan-500 hover:text-black transition-all"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="w-10 h-10 bg-white/5 flex items-center justify-center rounded-full hover:bg-cyan-500 hover:text-black transition-all"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-            <div>
-                <h5 class="font-black uppercase text-xs tracking-[0.3em] mb-6">Quick Links</h5>
-                <ul class="space-y-3 text-sm text-gray-500 font-bold uppercase tracking-widest">
-                    <li><a href="#team" class="hover:text-white transition">The Experts</a></li>
-                    <li><a href="#pricing" class="hover:text-white transition">Pricing</a></li>
-                    <li><a href="#faq" class="hover:text-white transition">Questions</a></li>
-                </ul>
-            </div>
-            <div>
-                <h5 class="font-black uppercase text-xs tracking-[0.3em] mb-6">Support</h5>
-                <ul class="space-y-3 text-sm text-gray-500 font-bold uppercase tracking-widest">
-                    <li><a href="mailto:khalidsahib2002@gmail.com" class="hover:text-white transition">Email Us</a></li>
-                    <li><a href="https://wa.me/923024405533" class="hover:text-white transition">WhatsApp</a></li>
-                </ul>
-            </div>
+    <footer class="py-24 px-6 border-t border-white/5 bg-slate-950 text-center">
+        <div class="text-3xl font-black mb-8 tracking-tighter">DIGIPULSE<span class="text-cyan-400">X</span></div>
+        <div class="flex justify-center gap-8 mb-12 text-gray-500 uppercase text-[10px] font-black tracking-widest">
+            <a href="#team" class="hover:text-cyan-400">Team</a>
+            <a href="#pricing" class="hover:text-cyan-400">Plans</a>
+            <a href="#faq" class="hover:text-cyan-400">Help</a>
         </div>
-        <div class="text-center text-[10px] text-gray-800 font-black uppercase tracking-[1em]">
-            © 2026 DIGIPULSEX | DESIGNED BY RANA KHALID
-        </div>
+        <p class="text-[10px] text-gray-700 font-black uppercase tracking-[0.5em]">© 2026 RANA KHALID | BUILT FOR SCALE</p>
     </footer>
 
     <script>
@@ -348,49 +372,37 @@
             s0.parentNode.insertBefore(s1,s0);
         })();
 
-        // Member Pop-up Logic
+        // Modal Logic
+        function toggleModal(id) {
+            document.getElementById(id).classList.toggle('active');
+        }
+
         function showMember(icon, name, role, bio) {
             document.getElementById('member-icon').innerText = icon;
             document.getElementById('member-name').innerText = name;
             document.getElementById('member-role').innerText = role;
             document.getElementById('member-bio').innerText = bio;
-            
             const waBtn = document.getElementById('chat-whatsapp-btn');
-            waBtn.onclick = () => {
-                const message = encodeURIComponent(`Hi, I saw ${name} on DigipulseX. I want to discuss ${role} services.`);
-                window.open(`https://wa.me/923024405533?text=${message}`, '_blank');
-            };
+            waBtn.onclick = () => window.open(`https://wa.me/923024405533?text=Hi ${name}, I saw you on DigipulseX.`, '_blank');
             toggleModal('team-modal');
         }
 
-        function toggleModal(id) {
-            const modal = document.getElementById(id);
-            modal.classList.toggle('active');
-        }
-
         function openLiveChat() {
-            if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
-                Tawk_API.maximize();
-            } else {
-                window.open('https://tawk.to/chat/67a3666b825083258e100e12/1ij9p02gq', '_blank');
-            }
+            if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) Tawk_API.maximize();
+            else window.open('https://tawk.to/chat/67a3666b825083258e100e12/1ij9p02gq', '_blank');
         }
 
         // Live Notifications
-        const messages = ["New Audit Booked by Ali!", "Ecom Surge Plan Ordered!", "Rana Khalid is now Live", "Someone from Dubai joined!", "ROAS +4.5x reported by client"];
-        function showNotification() {
+        const notifs = ["Ahmed just booked an audit!", "ROAS 5.2x achieved for local client!", "New Growth Strategy session started", "2 spots left for February!"];
+        setInterval(() => {
             const toast = document.getElementById('notification-toast');
-            document.getElementById('notif-text').innerText = messages[Math.floor(Math.random() * messages.length)];
+            document.getElementById('notif-text').innerText = notifs[Math.floor(Math.random()*notifs.length)];
             toast.classList.add('active');
             setTimeout(() => toast.classList.remove('active'), 5000);
-        }
-        setInterval(showNotification, 12000);
+        }, 15000);
 
-        // Click outside to close
         window.onclick = function(e) {
-            if (e.target.className && e.target.className.includes('custom-modal')) {
-                e.target.classList.remove('active');
-            }
+            if (e.target.className.includes('custom-modal')) e.target.classList.remove('active');
         }
     </script>
 </body>
