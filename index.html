@@ -3,252 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigipulseX | Entry Portal</title>
+    <title>DigipulseX | Expert Team & Growth</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&family=Plus+Jakarta+Sans:wght@800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap');
         
-        :root {
-            --cyan-glow: #22d3ee;
-            --deep-space: #020617;
-        }
-
-        body, html {
-            margin: 0; padding: 0;
-            font-family: 'Space Grotesk', sans-serif;
-            background-color: var(--deep-space);
+        body {
+            background-color: #020617;
             color: white;
-            overflow: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* --- PORTAL STYLES --- */
-        #portal-overlay {
+        /* ENTRY SPLASH SCREEN */
+        #entry-page {
             position: fixed;
             inset: 0;
+            background: #020617;
             z-index: 9999;
-            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: all 1s cubic-bezier(0.87, 0, 0.13, 1);
+            transition: transform 0.8s cubic-bezier(0.87, 0, 0.13, 1);
         }
 
-        /* Futuristic Background Grid */
-        .grid-bg {
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background-image: 
-                linear-gradient(rgba(34, 211, 238, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(34, 211, 238, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            transform: perspective(500px) rotateX(60deg);
-            animation: grid-move 20s linear infinite;
-            z-index: -1;
+        .entry-hidden {
+            transform: translateY(-100%);
         }
 
-        @keyframes grid-move {
-            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
-            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
-        }
-
-        .scan-line {
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            background: rgba(34, 211, 238, 0.3);
-            box-shadow: 0 0 15px var(--cyan-glow);
-            top: 0;
-            animation: scan 4s linear infinite;
-            z-index: 10;
-            pointer-events: none;
-        }
-
-        @keyframes scan {
-            0% { top: -10%; }
-            100% { top: 110%; }
-        }
-
-        .portal-logo-container {
-            text-align: center;
-            animation: emerge 1.2s ease-out;
-        }
-
-        @keyframes emerge {
-            from { opacity: 0; transform: scale(0.8) translateY(30px); filter: blur(10px); }
-            to { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
-        }
-
-        .brand-name {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 900;
-            letter-spacing: -0.05em;
-            text-transform: uppercase;
-            background: linear-gradient(to bottom, #fff 30%, var(--cyan-glow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 20px rgba(34, 211, 238, 0.4));
-        }
-
-        /* Sci-Fi Buttons */
-        .sci-fi-btn {
-            position: relative;
-            padding: 18px 45px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--cyan-glow);
-            background: rgba(34, 211, 238, 0.05);
-            border: 1px solid rgba(34, 211, 238, 0.2);
-            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
-            transition: all 0.4s;
-            cursor: pointer;
+        /* WHATSAPP FLOATING BUTTON */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(10deg);
         }
 
-        .sci-fi-btn:hover {
-            background: var(--cyan-glow);
-            color: black;
-            box-shadow: 0 0 50px rgba(34, 211, 238, 0.6);
-            transform: translateY(-3px);
+        /* HIRE ME BUTTON ARROW EFFECT */
+        .btn-hire {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(90deg, #06b6d4, #3b82f6);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-hire i {
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* --- MAIN SITE TRIGGER --- */
-        .portal-hidden {
-            transform: scale(1.5);
-            opacity: 0;
-            pointer-events: none;
+        .btn-hire:hover {
+            box-shadow: 0 0 25px rgba(34, 211, 238, 0.5);
+            transform: translateY(-2px);
         }
 
-        #main-app {
-            opacity: 0;
-            transition: opacity 1s ease 0.5s;
+        .btn-hire:hover i {
+            transform: translateX(8px);
         }
 
-        .app-visible {
-            opacity: 1 !important;
+        /* GLASS CARDS */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            transition: all 0.4s ease;
         }
+        .glass-card:hover { 
+            border-color: rgba(34, 211, 238, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .expert-gradient {
+            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pricing-popular {
+            border: 2px solid #06b6d4 !important;
+            position: relative;
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(34, 211, 238, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0); }
+        }
+        .animate-pulse-glow { animation: pulse-glow 2s infinite; }
     </style>
 </head>
 <body>
 
-    <!-- PORTAL PAGE -->
-    <div id="portal-overlay">
-        <div class="grid-bg"></div>
-        <div class="scan-line"></div>
-
-        <div class="portal-logo-container">
-            <div class="mb-4 inline-block p-4 rounded-2xl bg-cyan-500/10 border border-cyan-500/20">
-                <i class="fas fa-bolt text-5xl text-cyan-400 animate-pulse"></i>
+    <!-- ENTRY PAGE (SPLASH) -->
+    <div id="entry-page">
+        <div class="text-center">
+            <div class="mb-8 flex justify-center">
+                <div class="w-24 h-24 bg-cyan-500/10 rounded-3xl border-2 border-cyan-400 flex items-center justify-center animate-pulse-glow">
+                    <i class="fas fa-microchip text-4xl text-cyan-400"></i>
+                </div>
             </div>
-            <h1 class="brand-name mb-2">Digipulse<span class="text-white">X</span></h1>
-            <p class="text-cyan-400/60 font-bold tracking-[0.4em] text-[10px] uppercase mb-16">Establishing Secure Growth Connection...</p>
+            <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4">DIGIPULSE<span class="text-cyan-400">X</span></h1>
+            <p class="text-slate-400 font-bold tracking-[0.3em] uppercase text-xs mb-12">Next-Gen Digital Agency</p>
             
-            <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
-                <button onclick="unlockRealm()" class="sci-fi-btn group">
-                    <span>Initialize DigipulseX</span>
-                    <i class="fas fa-chevron-right text-[10px] group-hover:translate-x-2 transition-transform"></i>
+            <div class="flex flex-col md:flex-row gap-4">
+                <button onclick="closeEntry()" class="px-12 py-4 bg-white text-black font-black rounded-full uppercase tracking-widest hover:bg-cyan-400 transition-colors">
+                    Enter Agency
                 </button>
+                <button onclick="closeEntry(); setTimeout(()=>document.getElementById('contact').scrollIntoView(), 500)" class="px-12 py-4 border border-white/20 font-black rounded-full uppercase tracking-widest hover:bg-white/5 transition-colors">
+                    Contact Us
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- WHATSAPP FLOATING BUTTON -->
+    <a href="https://wa.me/923024405533" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="p-6 border-b border-white/5 backdrop-blur-md sticky top-0 z-50 bg-[#020617]/90">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-2xl font-black tracking-tighter">DIGIPULSE<span class="text-cyan-400">X</span></div>
+            <div class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-slate-400">
+                <a href="#pricing" class="hover:text-cyan-400">Pricing</a>
+                <a href="#team" class="hover:text-cyan-400">Team</a>
+                <a href="#expert" class="hover:text-cyan-400">Expert</a>
+                <a href="#contact" class="hover:text-cyan-400">Contact</a>
+            </div>
+            <a href="https://wa.me/923024405533" class="btn-hire text-white px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">
+                Hire Me <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-24 px-6 text-center">
+        <div class="inline-block px-4 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[10px] font-black uppercase tracking-[0.3em] mb-6">
+            Results Driven Agency
+        </div>
+        <h1 class="text-5xl md:text-8xl font-black tracking-tighter mb-8 leading-tight uppercase">
+            WE BUILD <span class="text-cyan-400">EMPIRES</span> <br> NOT JUST BRANDS
+        </h1>
+        <p class="text-slate-400 max-w-2xl mx-auto text-lg mb-12">Expert digital scaling strategies by Rana Khalid and his elite team.</p>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section id="pricing" class="py-24 container mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-4">Pricing <span class="text-cyan-400">Plans</span></h2>
+            <p class="text-slate-500 font-bold uppercase tracking-widest text-xs">Choose the best plan for your growth</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Plans remain same as requested -->
+            <div class="glass-card p-10 flex flex-col">
+                <h3 class="text-xl font-black mb-2 uppercase">Starter</h3>
+                <div class="text-4xl font-black text-cyan-400 mb-6">$299<span class="text-xs text-slate-500 font-normal">/mo</span></div>
+                <ul class="space-y-4 text-sm text-slate-400 mb-10 flex-grow">
+                    <li><i class="fas fa-check text-cyan-400 mr-2"></i> Social Media Management</li>
+                    <li><i class="fas fa-check text-cyan-400 mr-2"></i> 2 Meta Ad Campaigns</li>
+                </ul>
+                <button class="w-full py-4 bg-white/5 border border-white/10 rounded-2xl font-bold hover:bg-white hover:text-black transition-all">Get Started</button>
+            </div>
+            <div class="glass-card p-10 flex flex-col pricing-popular bg-slate-900/80 transform md:scale-105">
+                <h3 class="text-xl font-black mb-2 uppercase">Growth</h3>
+                <div class="text-4xl font-black text-cyan-400 mb-6">$599<span class="text-xs text-slate-500 font-normal">/mo</span></div>
+                <ul class="space-y-4 text-sm text-slate-300 mb-10 flex-grow">
+                    <li><i class="fas fa-check text-cyan-400 mr-2"></i> Full Digital Strategy</li>
+                    <li><i class="fas fa-check text-cyan-400 mr-2"></i> Unlimited Meta Ads</li>
+                    <li><i class="fas fa-check text-cyan-400 mr-2"></i> Priority WhatsApp Support</li>
+                </ul>
+                <button class="btn-hire w-full py-4 rounded-2xl font-bold justify-center text-white">Choose Growth <i class="fas fa-arrow-right"></i></button>
+            </div>
+            <div class="glass-card p-10 flex flex-col">
+                <h3 class="text-xl font-black mb-2 uppercase">Elite</h3>
+                <div class="text-4xl font-black text-cyan-400 mb-6">$999<span class="text-xs text-slate-500 font-normal">/mo</span></div>
+                <ul class="space-y-4 text-sm text-slate-400 mb-10 flex-grow">
+                    <li><i class="fas fa-check text-cyan-400 mr-2"></i> E-commerce Domination</li>
+                    <li><i class="fas fa-check text-cyan-400 mr-2"></i> 24/7 Dedicated Manager</li>
+                </ul>
+                <button class="w-full py-4 bg-white/5 border border-white/10 rounded-2xl font-bold hover:bg-white hover:text-black transition-all">Go Elite</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM MEMBERS SECTION -->
+    <section id="team" class="py-24 bg-slate-900/20 px-6">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-4">Core <span class="text-cyan-400">Team</span></h2>
+                <p class="text-slate-500 font-bold uppercase tracking-widest text-xs">The experts behind your success</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                <div class="glass-card p-8 text-center group">
+                    <div class="w-32 h-32 bg-slate-800 rounded-full mx-auto mb-6 border-4 border-cyan-500/30 flex items-center justify-center overflow-hidden">
+                        <i class="fas fa-user-tie text-5xl text-cyan-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-black mb-1">Rana Khalid</h3>
+                    <p class="text-cyan-400 text-xs font-black uppercase tracking-widest mb-4">Founder & CEO</p>
+                </div>
+                <div class="glass-card p-8 text-center group">
+                    <div class="w-32 h-32 bg-slate-800 rounded-full mx-auto mb-6 border-4 border-blue-500/30 flex items-center justify-center overflow-hidden">
+                        <i class="fas fa-user-astronaut text-5xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-black mb-1">Muhammad Ali</h3>
+                    <p class="text-blue-400 text-xs font-black uppercase tracking-widest mb-4">Head of Growth</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE EXPERT SECTION -->
+    <section id="expert" class="py-24 container mx-auto px-6">
+        <div class="glass-card p-10 md:p-20 flex flex-col md:flex-row items-center gap-16">
+            <div class="flex-1">
+                <h2 class="text-5xl font-black mb-8 uppercase leading-none">Rana Khalid <br><span class="expert-gradient">The Expert</span></h2>
+                <p class="text-slate-400 text-lg mb-8">Digital Specialist focused on high-conversion strategies and global brand building.</p>
+                <a href="https://wa.me/923024405533" class="btn-hire px-12 py-5 rounded-full font-black text-xs uppercase tracking-widest text-white">
+                    Talk To Me <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION (Enhanced) -->
+    <section id="contact" class="py-24 px-6 bg-slate-900/40">
+        <div class="container mx-auto max-w-5xl">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-4">Get In <span class="text-cyan-400">Touch</span></h2>
+                <p class="text-slate-500 font-bold uppercase tracking-widest text-xs">Let's discuss your next big project</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="space-y-8">
+                    <div class="flex items-center gap-6 glass-card p-6">
+                        <div class="w-12 h-12 bg-cyan-500/20 rounded-full flex items-center justify-center text-cyan-400">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Phone</p>
+                            <p class="text-xl font-bold">0302-4405533</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-6 glass-card p-6">
+                        <div class="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center text-blue-400">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Email</p>
+                            <p class="text-xl font-bold text-sm md:text-xl">khalidsahib2002@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-6 glass-card p-6">
+                        <div class="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center text-purple-400">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Location</p>
+                            <p class="text-xl font-bold">Kamoke, Pakistan</p>
+                        </div>
+                    </div>
+                </div>
                 
-                <button onclick="window.open('https://wa.me/923024405533', '_blank')" class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-white transition-colors flex items-center gap-2">
-                    <i class="fab fa-whatsapp"></i>
-                    Bypass to Commander
-                </button>
+                <form class="glass-card p-8 space-y-4" onsubmit="event.preventDefault()">
+                    <input type="text" placeholder="Full Name" class="w-full bg-slate-950/50 border border-white/10 p-4 rounded-xl focus:outline-none focus:border-cyan-400 transition-all">
+                    <input type="email" placeholder="Email Address" class="w-full bg-slate-950/50 border border-white/10 p-4 rounded-xl focus:outline-none focus:border-cyan-400 transition-all">
+                    <textarea placeholder="Your Message" rows="4" class="w-full bg-slate-950/50 border border-white/10 p-4 rounded-xl focus:outline-none focus:border-cyan-400 transition-all"></textarea>
+                    <button class="btn-hire w-full py-4 rounded-xl font-black uppercase text-white justify-center">Send Inquiry <i class="fas fa-arrow-right"></i></button>
+                </form>
             </div>
         </div>
+    </section>
 
-        <div class="absolute bottom-10 left-10 flex gap-10 opacity-20 text-[10px] font-mono">
-            <div>LAT: 32.2642° N</div>
-            <div>LONG: 74.2237° E</div>
-            <div>STATION: KAMOKE_PK</div>
-        </div>
-    </div>
-
-    <!-- MAIN WEBSITE CONTENT -->
-    <div id="main-app">
-        <!-- I am reusing the high-quality layout from your most recent App.jsx/OneFile.jsx logic -->
-        <nav class="fixed w-full z-50 top-0 p-6 flex justify-between items-center bg-slate-950/50 backdrop-blur-xl">
-            <div class="flex items-center gap-2 font-black text-xl tracking-tighter">
-                <i class="fas fa-bolt text-cyan-400"></i> DIGIPULSEX
-            </div>
-            <div class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest">
-                <a href="#services" class="hover:text-cyan-400">Solutions</a>
-                <a href="#results" class="hover:text-cyan-400">Metrics</a>
-                <a href="#contact" class="hover:text-cyan-400 text-cyan-400">Get Quote</a>
-            </div>
-        </nav>
-
-        <section class="min-h-screen flex flex-col justify-center items-center px-6 text-center">
-            <div class="max-w-4xl">
-                <span class="text-cyan-400 font-mono text-xs tracking-[0.5em] uppercase mb-6 block">Mission: Exponential Growth</span>
-                <h2 class="text-6xl md:text-8xl font-black mb-8 leading-none tracking-tighter">
-                    WE SCALE <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-600">BRANDS</span> <br> BEYOND LIMITS.
-                </h2>
-                <p class="text-slate-400 text-lg max-w-2xl mx-auto mb-12">
-                    DigipulseX is more than an agency. We are the architects of your digital future, using advanced marketing protocols to ensure market dominance.
-                </p>
-                <div class="flex gap-4 justify-center">
-                    <button class="bg-cyan-500 text-black px-10 py-5 rounded-full font-black uppercase text-xs tracking-widest hover:scale-105 transition">Deploy Campaign</button>
-                    <button class="border border-white/10 px-10 py-5 rounded-full font-black uppercase text-xs tracking-widest hover:bg-white/5 transition">View Protocols</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Metrics -->
-        <section id="results" class="py-20 container mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="p-10 bg-slate-900/50 border border-white/5 rounded-[40px] text-center">
-                    <div class="text-5xl font-black text-cyan-400 mb-2">5.4X</div>
-                    <div class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Average ROAS</div>
-                </div>
-                <div class="p-10 bg-slate-900/50 border border-white/5 rounded-[40px] text-center">
-                    <div class="text-5xl font-black text-purple-400 mb-2">$2M+</div>
-                    <div class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Revenue Generated</div>
-                </div>
-                <div class="p-10 bg-slate-900/50 border border-white/5 rounded-[40px] text-center">
-                    <div class="text-5xl font-black text-white mb-2">24/7</div>
-                    <div class="text-[10px] font-bold uppercase tracking-widest text-slate-500">System Monitoring</div>
-                </div>
-            </div>
-        </section>
-        
-        <footer class="py-20 text-center border-t border-white/5 text-slate-600 text-[10px] font-bold uppercase tracking-[1em]">
-            DigipulseX © 2026 | Developed by Rana Khalid
-        </footer>
-    </div>
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/5 text-center">
+        <p class="text-[10px] font-black uppercase tracking-[0.5em] text-slate-500">
+            © 2026 DIGIPULSEX | <span class="text-cyan-400">Rana Khalid & Muhammad Ali</span>
+        </p>
+    </footer>
 
     <script>
-        function unlockRealm() {
-            const portal = document.getElementById('portal-overlay');
-            const main = document.getElementById('main-app');
-            
-            // Start the fade out
-            portal.classList.add('portal-hidden');
-            
-            // Show main site
+        function closeEntry() {
+            document.getElementById('entry-page').classList.add('entry-hidden');
             setTimeout(() => {
-                portal.style.display = 'none';
-                main.classList.add('app-visible');
-                document.body.style.overflow = 'auto'; // Re-enable scrolling
-            }, 1000);
+                document.getElementById('entry-page').style.display = 'none';
+            }, 800);
         }
-
-        // Tawk.to Integration
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-            s1.async=true;
-            s1.src='https://embed.tawk.to/67a3666b825083258e100e12/1ij9p02gq';
-            s1.charset='UTF-8';
-            s1.setAttribute('crossorigin','*');
-            s0.parentNode.insertBefore(s1,s0);
-        })();
     </script>
 </body>
 </html>
