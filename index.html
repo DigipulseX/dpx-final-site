@@ -40,10 +40,6 @@
         .animate-slide {
             animation: slideIn 0.5s ease-out forwards;
         }
-        /* Modal Style */
-        #booking-modal {
-            transition: all 0.3s ease-in-out;
-        }
     </style>
 </head>
 <body class="selection:bg-cyan-500/30">
@@ -84,7 +80,7 @@
                 </div>
                 <div>
                     <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Aapka Budget</label>
-                    <input type="text" id="client-budget" placeholder="E.g. 20,000 PKR" class="w-full bg-slate-900/50 border border-slate-800 rounded-2xl p-4 text-white focus:border-cyan-500 outline-none mt-1">
+                    <input type="text" id="client-budget" placeholder="E.g. 50,000 PKR" class="w-full bg-slate-900/50 border border-slate-800 rounded-2xl p-4 text-white focus:border-cyan-500 outline-none mt-1">
                 </div>
                 <button onclick="sendBooking()" class="w-full py-5 bg-cyan-500 text-black font-black uppercase tracking-widest text-sm rounded-2xl glow-cyan hover:scale-[1.02] transition-all mt-4">
                     Send to Rana Khalid →
@@ -127,7 +123,7 @@
                     <span class="font-black text-xl tracking-tighter uppercase">DIGIPULSE<span class="text-cyan-400">X</span></span>
                 </div>
                 <div class="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-widest text-slate-400">
-                    <a href="#about" class="hover:text-cyan-400 transition-colors">Ham Kya Karte Hain</a>
+                    <a href="#about" class="hover:text-cyan-400 transition-colors">Services</a>
                     <a href="#pricing" class="hover:text-cyan-400 transition-colors">Pricing</a>
                     <a href="#comments" class="hover:text-cyan-400 transition-colors">Feedback</a>
                 </div>
@@ -152,7 +148,7 @@
             </div>
         </section>
 
-        <!-- About/Services Section -->
+        <!-- About Section -->
         <section id="about" class="py-24 px-6 container mx-auto">
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="glass-card p-10 rounded-[3rem] border-slate-800 hover:border-cyan-500/50 transition-all">
@@ -173,44 +169,59 @@
             </div>
         </section>
 
-        <!-- Pricing Section -->
+        <!-- Pricing Section (Market Competitive PKR Rates) -->
         <section id="pricing" class="py-24 px-6 bg-slate-950/40">
             <div class="container mx-auto">
                  <div class="text-center mb-12">
                     <h2 class="text-3xl font-black uppercase italic">Pick Your <span class="text-cyan-400">Empire Plan</span></h2>
+                    <p class="text-slate-500 text-sm mt-2 uppercase tracking-widest font-bold">Standard Pakistani Agency Rates</p>
                 </div>
                 <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                     <!-- Pricing Card 1 -->
-                    <div class="p-10 rounded-[40px] border border-slate-800 bg-[#0f172a]/50 text-center group">
-                        <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Starter</h3>
-                        <div class="text-4xl font-black mb-6 text-white">$299</div>
+                    <div class="p-10 rounded-[40px] border border-slate-800 bg-[#0f172a]/50 text-center">
+                        <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Starter (Social)</h3>
+                        <div class="text-4xl font-black mb-6 text-white">PKR 35,000</div>
+                        <ul class="text-[11px] text-slate-400 space-y-2 mb-8 text-left uppercase font-bold">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-cyan-400"></i> Social Management</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-cyan-400"></i> 10 Posts Monthly</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-cyan-400"></i> Basic Meta Ads</li>
+                        </ul>
                         <div class="space-y-3">
-                            <a href="https://wa.me/923024405533?text=Bhai%20mujay%20Starter%20Plan%20chahye%20JazzCash%20ki%20detail%20bhejien" class="block w-full py-4 rounded-2xl bg-[#fca311] text-black font-black uppercase text-[11px] tracking-widest hover:scale-105 transition-all">JazzCash</a>
-                            <a href="https://wa.me/923024405533?text=Bhai%20mujay%20Starter%20Plan%20chahye%20EasyPaisa%20ki%20detail%20bhejien" class="block w-full py-4 rounded-2xl bg-[#1db954] text-white font-black uppercase text-[11px] tracking-widest hover:scale-105 transition-all">EasyPaisa</a>
+                            <a href="https://wa.me/923024405533?text=Assalam-o-Alaikum%20Rana%20Khalid!%20Mujay%20Starter%20Plan%20(35,000%20PKR)%20chahye.%20JazzCash%20No%2003024405533%20par%20payment%20confirm%20karen." class="block w-full py-4 rounded-2xl bg-[#fca311] text-black font-black uppercase text-[11px] tracking-widest hover:scale-105 transition-all">JazzCash</a>
+                            <a href="https://wa.me/923024405533?text=Assalam-o-Alaikum%20Rana%20Khalid!%20Mujay%20Starter%20Plan%20(35,000%20PKR)%20chahye.%20EasyPaisa%20No%2003024405533%20par%20payment%20confirm%20karen." class="block w-full py-4 rounded-2xl bg-[#1db954] text-white font-black uppercase text-[11px] tracking-widest hover:scale-105 transition-all">EasyPaisa</a>
                         </div>
-                        <p class="mt-4 text-[10px] text-slate-500 font-bold italic uppercase">Pehle Paisa Bhejien Phir Screenshot Send Karein</p>
                     </div>
 
-                    <!-- Pricing Card 2 (Popular) -->
+                    <!-- Pricing Card 2 (Growth - Most Popular) -->
                     <div class="p-10 rounded-[40px] border-2 border-cyan-500 bg-[#0f172a] shadow-2xl text-center transform md:-translate-y-6">
-                        <h3 class="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-2">Growth</h3>
-                        <div class="text-4xl font-black mb-6 text-white">$599</div>
+                        <div class="bg-cyan-500 text-black text-[9px] font-black uppercase py-1 px-4 rounded-full inline-block mb-4 tracking-widest">Most Popular</div>
+                        <h3 class="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-2">Growth (Sales)</h3>
+                        <div class="text-4xl font-black mb-6 text-white">PKR 85,000</div>
+                        <ul class="text-[11px] text-slate-200 space-y-2 mb-8 text-left uppercase font-bold">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-cyan-400"></i> Full Sales Funnel</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-cyan-400"></i> Ads Optimization</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-cyan-400"></i> Video Content</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-cyan-400"></i> WhatsApp Support</li>
+                        </ul>
                         <div class="space-y-3">
-                            <a href="https://wa.me/923024405533?text=Bhai%20mujay%20Growth%20Plan%20chahye%20JazzCash%20ki%20detail%20bhejien" class="block w-full py-4 rounded-2xl bg-[#fca311] text-black font-black uppercase text-[11px] tracking-widest hover:scale-105 transition-all">JazzCash</a>
-                            <a href="https://wa.me/923024405533?text=Bhai%20mujay%20Growth%20Plan%20chahye%20EasyPaisa%20ki%20detail%20bhejien" class="block w-full py-4 rounded-2xl bg-[#1db954] text-white font-black uppercase text-[11px] tracking-widest hover:scale-105 transition-all">EasyPaisa</a>
+                            <a href="https://wa.me/923024405533?text=Assalam-o-Alaikum%20Rana%20Khalid!%20Mujay%20Growth%20Plan%20(85,000%20PKR)%20chahye.%20JazzCash%20No%2003024405533%20par%20payment%20confirm%20karen." class="block w-full py-4 rounded-2xl bg-[#fca311] text-black font-black uppercase text-[11px] tracking-widest hover:scale-105 transition-all">JazzCash</a>
+                            <a href="https://wa.me/923024405533?text=Assalam-o-Alaikum%20Rana%20Khalid!%20Mujay%20Growth%20Plan%20(85,000%20PKR)%20chahye.%20EasyPaisa%20No%2003024405533%20par%20payment%20confirm%20karen." class="block w-full py-4 rounded-2xl bg-[#1db954] text-white font-black uppercase text-[11px] tracking-widest hover:scale-105 transition-all">EasyPaisa</a>
                         </div>
-                        <p class="mt-4 text-[10px] text-cyan-400/70 font-bold italic uppercase">Pehle Paisa Bhejien Phir Screenshot Send Karein</p>
                     </div>
 
                     <!-- Pricing Card 3 -->
-                    <div class="p-10 rounded-[40px] border border-slate-800 bg-[#0f172a]/50 text-center group">
-                        <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Elite</h3>
-                        <div class="text-4xl font-black mb-6 text-white">$999</div>
+                    <div class="p-10 rounded-[40px] border border-slate-800 bg-[#0f172a]/50 text-center">
+                        <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Elite (Brand)</h3>
+                        <div class="text-4xl font-black mb-6 text-white">PKR 180,000</div>
+                        <ul class="text-[11px] text-slate-400 space-y-2 mb-8 text-left uppercase font-bold">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-cyan-400"></i> E-comm Domination</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-cyan-400"></i> Influencer Collabs</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-cyan-400"></i> Custom Website</li>
+                        </ul>
                         <div class="space-y-3">
-                            <a href="https://wa.me/923024405533?text=Bhai%20mujay%20Elite%20Plan%20chahye%20JazzCash%20ki%20detail%20bhejien" class="block w-full py-4 rounded-2xl bg-[#fca311] text-black font-black uppercase text-[11px] tracking-widest hover:scale-105 transition-all">JazzCash</a>
-                            <a href="https://wa.me/923024405533?text=Bhai%20mujay%20Elite%20Plan%20chahye%20EasyPaisa%20ki%20detail%20bhejien" class="block w-full py-4 rounded-2xl bg-[#1db954] text-white font-black uppercase text-[11px] tracking-widest hover:scale-105 transition-all">EasyPaisa</a>
+                            <a href="https://wa.me/923024405533?text=Assalam-o-Alaikum%20Rana%20Khalid!%20Mujay%20Elite%20Plan%20(180,000%20PKR)%20chahye.%20JazzCash%20No%2003024405533%20par%20payment%20confirm%20karen." class="block w-full py-4 rounded-2xl bg-[#fca311] text-black font-black uppercase text-[11px] tracking-widest hover:scale-105 transition-all">JazzCash</a>
+                            <a href="https://wa.me/923024405533?text=Assalam-o-Alaikum%20Rana%20Khalid!%20Mujay%20Elite%20Plan%20(180,000%20PKR)%20chahye.%20EasyPaisa%20No%2003024405533%20par%20payment%20confirm%20karen." class="block w-full py-4 rounded-2xl bg-[#1db954] text-white font-black uppercase text-[11px] tracking-widest hover:scale-105 transition-all">EasyPaisa</a>
                         </div>
-                        <p class="mt-4 text-[10px] text-slate-500 font-bold italic uppercase">Pehle Paisa Bhejien Phir Screenshot Send Karein</p>
                     </div>
                 </div>
             </div>
@@ -238,11 +249,6 @@
         <!-- Footer -->
         <footer class="py-12 px-6 border-t border-slate-900 text-center">
             <h5 class="font-black text-2xl uppercase mb-4 text-white">DIGIPULSE<span class="text-cyan-400">X</span></h5>
-            <div class="flex justify-center gap-6 mb-8 text-slate-500">
-                <a href="#" class="hover:text-cyan-400"><i data-lucide="instagram"></i></a>
-                <a href="#" class="hover:text-cyan-400"><i data-lucide="facebook"></i></a>
-                <a href="#" class="hover:text-cyan-400"><i data-lucide="linkedin"></i></a>
-            </div>
             <p class="text-slate-500 text-xs tracking-widest uppercase">© 2026 BY RANA KHALID | 0302-4405533</p>
         </footer>
     </div>
@@ -260,7 +266,6 @@
             }, 600);
         }
 
-        // Modal Functions
         function openModal() {
             document.getElementById('booking-modal').classList.remove('hidden');
         }
@@ -283,7 +288,6 @@
             }
         }
 
-        // Feedback Logic
         function addComment() {
             const name = document.getElementById('comment-name').value;
             const text = document.getElementById('comment-text').value;
@@ -298,33 +302,26 @@
             }
         }
 
-        // Social Proof Bot
         const activities = [
             { name: "Ahmed", loc: "Karachi", action: "just booked a Strategy Call!" },
             { name: "Sara", loc: "Lahore", action: "started an Elite Project!" },
             { name: "Zain", loc: "Islamabad", action: "paid via EasyPaisa!" },
-            { name: "Kamran", loc: "Dubai", action: "sent payment via JazzCash!" },
-            { name: "Usman", loc: "Faisalabad", action: "just upgraded to Elite!" }
+            { name: "Kamran", loc: "Faisalabad", action: "sent payment via JazzCash!" }
         ];
 
         function startSocialProof() {
             function showNext() {
                 const proof = document.getElementById('social-proof');
                 const activity = activities[Math.floor(Math.random() * activities.length)];
-                
                 document.getElementById('sp-initial').innerText = activity.name[0];
                 document.getElementById('sp-text').innerText = `${activity.name} from ${activity.loc} ${activity.action}`;
-                
                 proof.classList.remove('hidden');
-                setTimeout(() => {
-                    proof.classList.add('hidden');
-                }, 6000);
+                setTimeout(() => proof.classList.add('hidden'), 6000);
             }
             showNext();
             setInterval(showNext, 15000);
         }
 
-        // Navbar Scroll Effect
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
             if (window.scrollY > 50) {
