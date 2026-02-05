@@ -1,393 +1,288 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigipulseX | Futuristic Marketing & Brand Strategy</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap');
-        
-        body {
-            background-color: #020617;
-            color: white;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            margin: 0;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
+import React, { useState, useEffect } from 'react';
+import { 
+  Zap, 
+  Cpu, 
+  Phone, 
+  Mail, 
+  MapPin, 
+  ArrowRight, 
+  TrendingUp, 
+  MessageSquare, 
+  Send,
+  User,
+  CheckCircle2,
+  ShieldCheck,
+  Star,
+  BrainCircuit
+} from 'lucide-react';
 
-        /* ENTRY SPLASH SCREEN */
-        #entry-page {
-            position: fixed;
-            inset: 0;
-            background: #020617;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.8s cubic-bezier(0.87, 0, 0.13, 1);
-        }
+const App = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [comments, setComments] = useState([
+    { name: "Ahmed Khan", text: "Amazing results! My brand growth doubled in 2 months.", stars: 5 },
+    { name: "Sara Malik", text: "The best futuristic strategy in Pakistan.", stars: 5 }
+  ]);
+  const [newComment, setNewComment] = useState({ name: "", text: "" });
 
-        .entry-hidden {
-            transform: translateY(-100%);
-        }
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-        /* WHATSAPP FLOATING BUTTON */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: #25d366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-        .whatsapp-float:hover {
-            transform: scale(1.1) rotate(10deg);
-        }
+  const handleCommentSubmit = (e) => {
+    e.preventDefault();
+    if (newComment.name && newComment.text) {
+      setComments([...comments, { ...newComment, stars: 5 }]);
+      setNewComment({ name: "", text: "" });
+    }
+  };
 
-        /* HIRE ME BUTTON ARROW EFFECT */
-        .btn-hire {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: linear-gradient(90deg, #06b6d4, #3b82f6);
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-        }
-        
-        .btn-hire i {
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+  const scrollToSection = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
-        .btn-hire:hover {
-            box-shadow: 0 0 25px rgba(34, 211, 238, 0.5);
-            transform: translateY(-2px);
-        }
+  return (
+    <div className="min-h-screen bg-[#020617] text-white font-sans selection:bg-cyan-500 selection:text-white overflow-x-hidden">
+      
+      {/* Background Effects */}
+      <div className="fixed inset-0 pointer-events-none -z-10">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_-20%,#1e1b4b,transparent_70%)]"></div>
+        <div className="absolute top-[20%] right-[-10%] w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-[20%] left-[-10%] w-96 h-96 bg-purple-600/10 rounded-full blur-[120px]"></div>
+      </div>
 
-        .btn-hire:hover i {
-            transform: translateX(8px);
-        }
+      {/* WhatsApp Floating Button */}
+      <a 
+        href="https://wa.me/923024405533" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-[100] bg-[#25D366] p-4 rounded-full shadow-[0_0_20px_rgba(37,211,102,0.4)] hover:scale-110 transition-transform flex items-center justify-center group"
+      >
+        <span className="absolute right-full mr-3 bg-white text-black px-3 py-1 rounded-lg text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Chat with Rana Khalid</span>
+        <Phone className="text-white fill-current" size={24} />
+      </a>
 
-        /* GLASS CARDS */
-        .glass-card {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 2rem;
-            transition: all 0.4s ease;
-        }
-        .glass-card:hover { 
-            border-color: rgba(34, 211, 238, 0.3);
-            transform: translateY(-5px);
-        }
-
-        /* PAYMENT MODAL */
-        #payment-modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(8px);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .expert-gradient {
-            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .pricing-popular {
-            border: 2px solid #06b6d4 !important;
-            position: relative;
-        }
-
-        @keyframes pulse-glow {
-            0% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.4); }
-            70% { box-shadow: 0 0 0 20px rgba(34, 211, 238, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0); }
-        }
-        .animate-pulse-glow { animation: pulse-glow 2s infinite; }
-    </style>
-</head>
-<body>
-
-    <!-- ENTRY PAGE (SPLASH) -->
-    <div id="entry-page">
-        <div class="text-center">
-            <div class="mb-8 flex justify-center">
-                <div class="w-24 h-24 bg-cyan-500/10 rounded-3xl border-2 border-cyan-400 flex items-center justify-center animate-pulse-glow">
-                    <i class="fas fa-microchip text-4xl text-cyan-400"></i>
-                </div>
-            </div>
-            <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4">DIGIPULSE<span class="text-cyan-400">X</span></h1>
-            <p class="text-slate-400 font-bold tracking-[0.3em] uppercase text-xs mb-12">Next-Gen Digital Agency</p>
-            
-            <div class="flex flex-col md:flex-row gap-4">
-                <button onclick="closeEntry()" class="px-12 py-4 bg-white text-black font-black rounded-full uppercase tracking-widest hover:bg-cyan-400 transition-colors">
-                    Enter Agency
-                </button>
-                <button onclick="closeEntry(); setTimeout(()=>document.getElementById('contact').scrollIntoView(), 500)" class="px-12 py-4 border border-white/20 font-black rounded-full uppercase tracking-widest hover:bg-white/5 transition-colors">
-                    Contact Us
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- PAYMENT MODAL -->
-    <div id="payment-modal">
-        <div class="glass-card max-w-lg w-full p-8 relative border-2 border-cyan-500/50">
-            <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white">
-                <i class="fas fa-times text-xl"></i>
+      {/* Navbar */}
+      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#020617]/90 backdrop-blur-xl border-b border-white/10 py-4' : 'bg-transparent py-8'}`}>
+        <div className="container mx-auto px-6 flex justify-between items-center">
+          <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo(0,0)}>
+            <Cpu className="text-cyan-400 w-8 h-8 animate-pulse" />
+            <span className="text-2xl font-black tracking-tighter uppercase">DIGIPULSE<span className="text-cyan-400">X</span></span>
+          </div>
+          <div className="hidden md:flex gap-8 items-center uppercase text-[10px] font-black tracking-widest">
+            <button onClick={() => scrollToSection('home')} className="hover:text-cyan-400 transition-colors">Home</button>
+            <button onClick={() => scrollToSection('pricing')} className="hover:text-cyan-400 transition-colors">Pricing</button>
+            <button onClick={() => scrollToSection('team')} className="hover:text-cyan-400 transition-colors">Team</button>
+            <button 
+              onClick={() => scrollToSection('contact')}
+              className="bg-cyan-500 text-black px-6 py-2 rounded-full hover:bg-white transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)]"
+            >
+              Start Journey
             </button>
-            <h2 class="text-3xl font-black uppercase mb-2 tracking-tighter">Secure <span class="text-cyan-400">Payment</span></h2>
-            <p id="selected-plan-text" class="text-slate-400 text-sm mb-8 font-bold uppercase tracking-widest">Plan: Starter ($299)</p>
-            
-            <div class="space-y-4 mb-8">
-                <!-- EasyPaisa -->
-                <div class="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/10 hover:border-cyan-400/50 transition-all">
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center text-green-400">
-                            <i class="fas fa-wallet"></i>
-                        </div>
-                        <div>
-                            <p class="text-[10px] font-bold text-slate-500 uppercase">Easypaisa</p>
-                            <p class="font-bold">0302-4405533</p>
-                        </div>
-                    </div>
-                    <button onclick="copyToClipboard('03024405533')" class="text-cyan-400 text-xs font-bold uppercase">Copy</button>
-                </div>
-                <!-- JazzCash -->
-                <div class="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/10 hover:border-cyan-400/50 transition-all">
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 bg-red-500/20 rounded-full flex items-center justify-center text-red-400">
-                            <i class="fas fa-money-bill-wave"></i>
-                        </div>
-                        <div>
-                            <p class="text-[10px] font-bold text-slate-500 uppercase">JazzCash</p>
-                            <p class="font-bold">0302-4405533</p>
-                        </div>
-                    </div>
-                    <button onclick="copyToClipboard('03024405533')" class="text-cyan-400 text-xs font-bold uppercase">Copy</button>
-                </div>
-            </div>
-
-            <div class="bg-cyan-500/10 p-4 rounded-2xl mb-8 border border-cyan-500/20">
-                <p class="text-xs text-cyan-400 leading-relaxed font-medium">
-                    <i class="fas fa-info-circle mr-2"></i> Pehle payment transfer karein, phir niche diye gaye button par click karke screenshot bhejien.
-                </p>
-            </div>
-
-            <a href="https://wa.me/923024405533?text=Hi%2C%20I%20have%20made%20the%20payment.%20Here%20is%20the%20screenshot." target="_blank" class="btn-hire w-full py-4 rounded-xl font-black uppercase text-white justify-center text-center">
-                I Have Paid, Send Screenshot <i class="fas fa-check-circle ml-2"></i>
-            </a>
+          </div>
         </div>
+      </nav>
+
+      {/* Hero Section - Entry Page */}
+      <section id="home" className="relative min-h-screen flex items-center pt-20">
+        <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+          <div className="space-y-8">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[11px] font-black uppercase tracking-widest">
+              <ShieldCheck size={14} /> Top-Tier Digital Agency
+            </div>
+            <h1 className="text-5xl md:text-8xl font-black leading-[0.9] tracking-tighter uppercase">
+              WE BUILD <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">EMPIRES</span> <br />
+              NOT JUST BRANDS
+            </h1>
+            <p className="text-slate-400 text-lg max-w-xl leading-relaxed">
+              Expert digital scaling strategies by Rana Khalid and his elite team. We decode the future of marketing for your growth.
+            </p>
+            <div className="flex flex-wrap gap-4 pt-4">
+              <button onClick={() => scrollToSection('pricing')} className="group bg-cyan-500 text-black px-10 py-5 rounded-full font-black text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-white transition-all">
+                START YOUR JOURNEY <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
+          </div>
+          <div className="relative flex justify-center items-center">
+            {/* Brain/Cyber Visual Placeholder */}
+            <div className="relative w-full max-w-lg">
+              <div className="absolute inset-0 bg-cyan-500/20 rounded-full blur-[100px] animate-pulse"></div>
+              <div className="relative p-12 bg-white/[0.03] border border-white/10 rounded-[4rem] backdrop-blur-3xl overflow-hidden group">
+                <BrainCircuit className="w-full h-auto text-cyan-400/20 absolute -right-20 -top-20" size={300} />
+                <div className="relative z-10 space-y-6">
+                  <div className="flex justify-between items-center">
+                    <div className="p-3 bg-cyan-500/20 rounded-2xl"><TrendingUp className="text-cyan-400" /></div>
+                    <span className="text-3xl font-black">+420% ROI</span>
+                  </div>
+                  <div className="h-40 flex items-end gap-2">
+                    {[40, 70, 50, 90, 60, 100].map((h, i) => (
+                      <div key={i} style={{height: `${h}%`}} className="flex-1 bg-slate-800 rounded-t-lg group-hover:bg-cyan-500 transition-all duration-500"></div>
+                    ))}
+                  </div>
+                  <p className="text-xs font-bold uppercase tracking-widest text-slate-500">Neural Network Marketing Active</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section id="pricing" className="py-32 relative bg-slate-900/20">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-20 space-y-4">
+            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter">PRICING <span className="text-cyan-400">PLANS</span></h2>
+            <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Choose the best plan for your growth</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* Starter */}
+            <div className="p-10 rounded-[3rem] bg-white/[0.03] border border-white/5 hover:border-cyan-500/30 transition-all flex flex-col">
+              <h3 className="text-sm font-black uppercase mb-2 tracking-widest">Starter</h3>
+              <div className="text-5xl font-black mb-8">$299<span className="text-sm text-slate-500">/mo</span></div>
+              <ul className="space-y-4 mb-10 flex-grow text-sm text-slate-400">
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-cyan-400" /> Social Media Management</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-cyan-400" /> Basic Ad Campaigns</li>
+                <li className="flex items-center gap-2 text-slate-600 underline">24/7 Support</li>
+              </ul>
+              <button className="w-full py-4 rounded-2xl border border-white/10 font-black uppercase text-[10px] tracking-widest hover:bg-white hover:text-black transition-all">Get Started</button>
+            </div>
+            {/* Growth */}
+            <div className="p-10 rounded-[3rem] bg-cyan-500/5 border-2 border-cyan-500 shadow-[0_0_40px_rgba(6,182,212,0.15)] flex flex-col scale-105 relative">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-cyan-500 text-black px-4 py-1 rounded-full text-[9px] font-black uppercase tracking-widest">Most Popular</div>
+              <h3 className="text-sm font-black uppercase mb-2 tracking-widest text-cyan-400">Growth</h3>
+              <div className="text-5xl font-black mb-8">$599<span className="text-sm text-slate-500">/mo</span></div>
+              <ul className="space-y-4 mb-10 flex-grow text-sm text-slate-200">
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-cyan-400" /> Full Digital Strategy</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-cyan-400" /> Multi-Platform Ads</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-cyan-400" /> Priority WhatsApp Support</li>
+              </ul>
+              <button className="w-full py-4 rounded-2xl bg-cyan-500 text-black font-black uppercase text-[10px] tracking-widest hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all">Choose Growth</button>
+            </div>
+            {/* Elite */}
+            <div className="p-10 rounded-[3rem] bg-white/[0.03] border border-white/5 hover:border-cyan-500/30 transition-all flex flex-col">
+              <h3 className="text-sm font-black uppercase mb-2 tracking-widest">Elite</h3>
+              <div className="text-5xl font-black mb-8">$999<span className="text-sm text-slate-500">/mo</span></div>
+              <ul className="space-y-4 mb-10 flex-grow text-sm text-slate-400">
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-cyan-400" /> E-commerce Domination</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-cyan-400" /> Full Brand Overhaul</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-cyan-400" /> 1-on-1 Consultation</li>
+              </ul>
+              <button className="w-full py-4 rounded-2xl border border-white/10 font-black uppercase text-[10px] tracking-widest hover:bg-white hover:text-black transition-all">Go Elite</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Core Team */}
+      <section id="team" className="py-32 container mx-auto px-6">
+        <div className="text-center mb-20 space-y-4">
+          <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter">CORE <span className="text-cyan-400">TEAM</span></h2>
+          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">The experts behind your success</p>
+        </div>
+        <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+          <div className="group text-center space-y-4">
+            <div className="relative mx-auto w-48 h-48 rounded-full border-4 border-cyan-500/20 p-2 group-hover:border-cyan-500 transition-all duration-500">
+               <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center overflow-hidden">
+                  <User size={80} className="text-slate-700" />
+               </div>
+            </div>
+            <h3 className="text-2xl font-black uppercase">Rana Khalid</h3>
+            <p className="text-cyan-400 text-xs font-black uppercase tracking-widest">Founder & CEO</p>
+          </div>
+          <div className="group text-center space-y-4">
+            <div className="relative mx-auto w-48 h-48 rounded-full border-4 border-cyan-500/20 p-2 group-hover:border-cyan-500 transition-all duration-500">
+               <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center overflow-hidden">
+                  <User size={80} className="text-slate-700" />
+               </div>
+            </div>
+            <h3 className="text-2xl font-black uppercase">Muhammad Ali</h3>
+            <p className="text-cyan-400 text-xs font-black uppercase tracking-widest">Head of Growth</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Reviews Section */}
+      <section className="py-32 bg-slate-900/10">
+        <div className="container mx-auto px-6 max-w-4xl">
+           <div className="text-center mb-16 space-y-4">
+            <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter">CLIENT <span className="text-cyan-400">REVIEWS</span></h2>
+          </div>
+          
+          <div className="space-y-6 mb-16">
+            {comments.map((c, i) => (
+              <div key={i} className="bg-white/[0.02] border border-white/5 p-6 rounded-3xl">
+                <div className="flex gap-1 text-yellow-500 mb-2">
+                  {[...Array(c.stars)].map((_, j) => <Star key={j} size={14} fill="currentColor" />)}
+                </div>
+                <p className="text-slate-300 italic mb-3 font-medium">"{c.text}"</p>
+                <p className="text-cyan-400 text-xs font-black uppercase">— {c.name}</p>
+              </div>
+            ))}
+          </div>
+
+          <form onSubmit={handleCommentSubmit} className="bg-white/[0.02] border border-white/10 p-8 rounded-[2rem] space-y-6">
+            <h4 className="text-xl font-black uppercase tracking-tighter">Leave a <span className="text-cyan-400">Comment</span></h4>
+            <div className="grid md:grid-cols-2 gap-4">
+              <input 
+                type="text" 
+                placeholder="Aapka Naam"
+                className="bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-cyan-500 transition-all text-sm"
+                value={newComment.name}
+                onChange={(e) => setNewComment({...newComment, name: e.target.value})}
+              />
+              <button type="submit" className="bg-white text-black font-black uppercase text-[10px] tracking-widest rounded-xl py-3 hover:bg-cyan-500 transition-all flex items-center justify-center gap-2">
+                Submit Feedback <Send size={14} />
+              </button>
+            </div>
+            <textarea 
+              placeholder="Apna tajruba share karein..."
+              rows="3"
+              className="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-cyan-500 transition-all text-sm"
+              value={newComment.text}
+              onChange={(e) => setNewComment({...newComment, text: e.target.value})}
+            ></textarea>
+          </form>
+        </div>
+      </section>
+
+      {/* Footer / Contact */}
+      <footer id="contact" className="py-24 border-t border-white/5 bg-[#020617] relative">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
+            <div className="space-y-8">
+              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none">NEED <br /><span className="text-cyan-400 text-5xl md:text-7xl">HELP?</span></h2>
+              <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">Instant Support Available</p>
+              <div className="space-y-4">
+                <div className="flex items-center gap-4 group">
+                  <div className="p-4 bg-white/5 rounded-2xl border border-white/10 group-hover:border-cyan-500 transition-all"><Phone className="text-cyan-400" /></div>
+                  <div><p className="text-xs font-black uppercase text-slate-500">Call Us</p><p className="text-lg font-black">0302-4405533</p></div>
+                </div>
+                <div className="flex items-center gap-4 group">
+                  <div className="p-4 bg-white/5 rounded-2xl border border-white/10 group-hover:border-cyan-500 transition-all"><Mail className="text-cyan-400" /></div>
+                  <div><p className="text-xs font-black uppercase text-slate-500">Email Us</p><p className="text-lg font-black underline">khalidsahib2002@gmail.com</p></div>
+                </div>
+              </div>
+            </div>
+            <div className="p-10 bg-cyan-500/5 rounded-[3rem] border border-cyan-500/20 text-center">
+              <h3 className="text-2xl font-black uppercase mb-4">Start Growing <span className="text-cyan-400">Now</span></h3>
+              <p className="text-slate-400 mb-8 text-sm">Join the 100+ brands we scaled last year.</p>
+              <a href="https://wa.me/923024405533" target="_blank" className="inline-block bg-white text-black px-12 py-5 rounded-full font-black uppercase text-xs tracking-[0.2em] hover:bg-cyan-500 transition-all shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+                WhatsApp Expert
+              </a>
+            </div>
+          </div>
+          <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="flex items-center gap-2">
+              <Cpu className="text-cyan-400 w-6 h-6" />
+              <span className="text-xl font-black tracking-tighter uppercase">DIGIPULSE<span className="text-cyan-400">X</span></span>
+            </div>
+            <p className="text-slate-600 text-[9px] font-black tracking-[0.6em] uppercase">© 2026 DIGIPULSEX | BY RANA KHALID | KAMOKE, PAKISTAN</p>
+          </div>
+        </div>
+      </footer>
     </div>
+  );
+};
 
-    <!-- WHATSAPP FLOATING BUTTON -->
-    <a href="https://wa.me/923024405533" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- Navigation -->
-    <nav class="p-6 border-b border-white/5 backdrop-blur-md sticky top-0 z-50 bg-[#020617]/90">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="text-2xl font-black tracking-tighter cursor-pointer" onclick="window.scrollTo(0,0)">DIGIPULSE<span class="text-cyan-400">X</span></div>
-            <div class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-slate-400">
-                <a href="#pricing" class="hover:text-cyan-400">Pricing</a>
-                <a href="#team" class="hover:text-cyan-400">Team</a>
-                <a href="#expert" class="hover:text-cyan-400">Expert</a>
-                <a href="#contact" class="hover:text-cyan-400">Contact</a>
-            </div>
-            <a href="https://wa.me/923024405533" target="_blank" class="btn-hire text-white px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">
-                Hire Me <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="py-24 px-6 text-center">
-        <div class="inline-block px-4 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[10px] font-black uppercase tracking-[0.3em] mb-6">
-            Results Driven Agency
-        </div>
-        <h1 class="text-5xl md:text-8xl font-black tracking-tighter mb-8 leading-tight uppercase">
-            WE BUILD <span class="text-cyan-400">EMPIRES</span> <br> NOT JUST BRANDS
-        </h1>
-        <p class="text-slate-400 max-w-2xl mx-auto text-lg mb-12">Expert digital scaling strategies by Rana Khalid and his elite team.</p>
-        <a href="#pricing" class="btn-hire text-white px-12 py-5 rounded-full font-black text-xs uppercase tracking-widest shadow-xl">
-            Start Your Journey <i class="fas fa-arrow-right"></i>
-        </a>
-    </section>
-
-    <!-- PRICING SECTION -->
-    <section id="pricing" class="py-24 container mx-auto px-6">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-4">Pricing <span class="text-cyan-400">Plans</span></h2>
-            <p class="text-slate-500 font-bold uppercase tracking-widest text-xs">Choose the best plan for your growth</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Starter Plan -->
-            <div class="glass-card p-10 flex flex-col">
-                <h3 class="text-xl font-black mb-2 uppercase">Starter</h3>
-                <div class="text-4xl font-black text-cyan-400 mb-6">$299<span class="text-xs text-slate-500 font-normal">/mo</span></div>
-                <ul class="space-y-4 text-sm text-slate-400 mb-10 flex-grow">
-                    <li><i class="fas fa-check text-cyan-400 mr-2"></i> Social Media Management</li>
-                    <li><i class="fas fa-check text-cyan-400 mr-2"></i> 2 Meta Ad Campaigns</li>
-                </ul>
-                <button onclick="openModal('Starter Plan', '$299')" class="w-full py-4 bg-white/5 border border-white/10 rounded-2xl font-bold hover:bg-white hover:text-black transition-all text-center uppercase text-xs tracking-widest">Get Started</button>
-            </div>
-            <!-- Growth Plan (Popular) -->
-            <div class="glass-card p-10 flex flex-col pricing-popular bg-slate-900/80 transform md:scale-105">
-                <h3 class="text-xl font-black mb-2 uppercase">Growth</h3>
-                <div class="text-4xl font-black text-cyan-400 mb-6">$599<span class="text-xs text-slate-500 font-normal">/mo</span></div>
-                <ul class="space-y-4 text-sm text-slate-300 mb-10 flex-grow">
-                    <li><i class="fas fa-check text-cyan-400 mr-2"></i> Full Digital Strategy</li>
-                    <li><i class="fas fa-check text-cyan-400 mr-2"></i> Unlimited Meta Ads</li>
-                    <li><i class="fas fa-check text-cyan-400 mr-2"></i> Priority WhatsApp Support</li>
-                </ul>
-                <button onclick="openModal('Growth Plan', '$599')" class="btn-hire w-full py-4 rounded-2xl font-bold justify-center text-white text-center uppercase text-xs tracking-widest">Choose Growth <i class="fas fa-arrow-right"></i></button>
-            </div>
-            <!-- Elite Plan -->
-            <div class="glass-card p-10 flex flex-col">
-                <h3 class="text-xl font-black mb-2 uppercase">Elite</h3>
-                <div class="text-4xl font-black text-cyan-400 mb-6">$999<span class="text-xs text-slate-500 font-normal">/mo</span></div>
-                <ul class="space-y-4 text-sm text-slate-400 mb-10 flex-grow">
-                    <li><i class="fas fa-check text-cyan-400 mr-2"></i> E-commerce Domination</li>
-                    <li><i class="fas fa-check text-cyan-400 mr-2"></i> 24/7 Dedicated Manager</li>
-                </ul>
-                <button onclick="openModal('Elite Plan', '$999')" class="w-full py-4 bg-white/5 border border-white/10 rounded-2xl font-bold hover:bg-white hover:text-black transition-all text-center uppercase text-xs tracking-widest">Go Elite</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- TEAM MEMBERS SECTION -->
-    <section id="team" class="py-24 bg-slate-900/20 px-6">
-        <div class="container mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-4">Core <span class="text-cyan-400">Team</span></h2>
-                <p class="text-slate-500 font-bold uppercase tracking-widest text-xs">The experts behind your success</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-                <div class="glass-card p-8 text-center group">
-                    <div class="w-32 h-32 bg-slate-800 rounded-full mx-auto mb-6 border-4 border-cyan-500/30 flex items-center justify-center overflow-hidden">
-                        <i class="fas fa-user-tie text-5xl text-cyan-400"></i>
-                    </div>
-                    <h3 class="text-2xl font-black mb-1">Rana Khalid</h3>
-                    <p class="text-cyan-400 text-xs font-black uppercase tracking-widest mb-4">Founder & CEO</p>
-                </div>
-                <div class="glass-card p-8 text-center group">
-                    <div class="w-32 h-32 bg-slate-800 rounded-full mx-auto mb-6 border-4 border-blue-500/30 flex items-center justify-center overflow-hidden">
-                        <i class="fas fa-user-astronaut text-5xl text-blue-400"></i>
-                    </div>
-                    <h3 class="text-2xl font-black mb-1">Muhammad Ali</h3>
-                    <p class="text-blue-400 text-xs font-black uppercase tracking-widest mb-4">Head of Growth</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- THE EXPERT SECTION -->
-    <section id="expert" class="py-24 container mx-auto px-6">
-        <div class="glass-card p-10 md:p-20 flex flex-col md:flex-row items-center gap-16">
-            <div class="flex-1 text-center md:text-left">
-                <h2 class="text-5xl font-black mb-8 uppercase leading-none">Rana Khalid <br><span class="expert-gradient">The Expert</span></h2>
-                <p class="text-slate-400 text-lg mb-8">Digital Specialist focused on high-conversion strategies and global brand building.</p>
-                <a href="https://wa.me/923024405533" target="_blank" class="btn-hire px-12 py-5 rounded-full font-black text-xs uppercase tracking-widest text-white">
-                    Talk To Me <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="py-24 px-6 bg-slate-900/40">
-        <div class="container mx-auto max-w-5xl text-center">
-            <h2 class="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-4">Need <span class="text-cyan-400">Help?</span></h2>
-            <p class="text-slate-500 font-bold uppercase tracking-widest text-xs mb-12">Instant support available</p>
-            <div class="flex flex-col md:flex-row gap-6 justify-center">
-                <div class="glass-card p-8 flex-1">
-                    <i class="fas fa-phone text-cyan-400 text-3xl mb-4"></i>
-                    <p class="text-xl font-bold">0302-4405533</p>
-                </div>
-                <div class="glass-card p-8 flex-1">
-                    <i class="fab fa-whatsapp text-green-400 text-3xl mb-4"></i>
-                    <p class="text-xl font-bold">WhatsApp Expert</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-12 border-t border-white/5 text-center">
-        <p class="text-[10px] font-black uppercase tracking-[0.5em] text-slate-500">
-            © 2026 DIGIPULSEX | <span class="text-cyan-400">Rana Khalid</span>
-        </p>
-    </footer>
-
-    <script>
-        function closeEntry() {
-            document.getElementById('entry-page').classList.add('entry-hidden');
-            setTimeout(() => {
-                document.getElementById('entry-page').style.display = 'none';
-            }, 800);
-        }
-
-        function openModal(plan, price) {
-            document.getElementById('payment-modal').style.display = 'flex';
-            document.getElementById('selected-plan-text').innerText = `Plan: ${plan} (${price})`;
-        }
-
-        function closeModal() {
-            document.getElementById('payment-modal').style.display = 'none';
-        }
-
-        function copyToClipboard(text) {
-            const tempInput = document.createElement("input");
-            tempInput.value = text;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand("copy");
-            document.body.removeChild(tempInput);
-            
-            // Custom simple notification (non-blocking)
-            const btn = event.target;
-            const originalText = btn.innerText;
-            btn.innerText = "COPIED!";
-            btn.classList.add("text-white");
-            setTimeout(() => {
-                btn.innerText = originalText;
-                btn.classList.remove("text-white");
-            }, 2000);
-        }
-
-        // Close modal on outside click
-        window.onclick = function(event) {
-            const modal = document.getElementById('payment-modal');
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-    </script>
-</body>
-</html>
-
-
+export default App;
