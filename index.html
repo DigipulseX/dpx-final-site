@@ -66,7 +66,6 @@
             100% { opacity: 1; transform: scale(1); }
         }
 
-        /* Live Notification Toast */
         #notification-toast {
             position: fixed;
             bottom: 30px;
@@ -79,7 +78,6 @@
             transform: translateX(0);
         }
 
-        /* Modal Styles */
         .custom-modal {
             display: none;
             position: fixed;
@@ -107,7 +105,7 @@
 
     <div class="bg-glow"></div>
 
-    <!-- Live Order/Activity Notification -->
+    <!-- Live Notification -->
     <div id="notification-toast">
         <div class="glass-card flex items-center gap-4 p-4 rounded-2xl border-l-4 border-l-cyan-400 min-w-[300px]">
             <div class="w-10 h-10 bg-cyan-500/20 rounded-full flex items-center justify-center text-cyan-400">
@@ -129,10 +127,10 @@
             <h3 class="text-3xl font-black mb-2 uppercase tracking-tighter text-cyan-400">Schedule Audit</h3>
             <p class="text-gray-400 text-sm mb-8">Slot book karein, Rana Khalid ki team rabta karegi.</p>
             
-            <form action="https://formspree.io/f/your-id" method="POST" class="space-y-5">
-                <input type="text" name="name" placeholder="Full Name" class="form-input" required>
-                <input type="tel" name="phone" placeholder="WhatsApp Number" class="form-input" required>
-                <select name="service" class="form-input">
+            <form action="#" class="space-y-5">
+                <input type="text" placeholder="Full Name" class="form-input" required>
+                <input type="tel" placeholder="WhatsApp Number" class="form-input" required>
+                <select class="form-input">
                     <option>Ads Management</option>
                     <option>SEO Services</option>
                     <option>Social Media Growth</option>
@@ -142,7 +140,7 @@
         </div>
     </div>
 
-    <!-- Team Member Pop-up Modal -->
+    <!-- Team Member Pop-up Modal (Yahi wo cheez hai jo click par khulti hai) -->
     <div id="team-modal" class="custom-modal">
         <div class="glass-card max-w-md w-full p-10 rounded-[40px] relative border border-cyan-500/30 text-center cursor-default">
             <button onclick="toggleModal('team-modal')" class="absolute top-8 right-8 text-gray-400 hover:text-white">
@@ -188,23 +186,17 @@
     <!-- Hero Section -->
     <section class="pt-44 pb-24 px-6 text-center">
         <div class="container mx-auto">
-            <span class="inline-block px-4 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[10px] font-black uppercase tracking-[0.3em] mb-8">
-                Official Agency of Rana Khalid
-            </span>
             <h1 class="text-6xl md:text-8xl font-black mb-8 tracking-tighter leading-[0.9] uppercase">
-                Scale Your <br> <span class="text-cyan-400 text-glow">Business.</span>
+                Scale Your <br> <span class="text-cyan-400">Business.</span>
             </h1>
-            <p class="text-gray-400 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
-                Premium digital marketing systems to turn your brand into a profit-making machine.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-5">
-                <button onclick="toggleModal('booking-modal')" class="btn-primary px-12 py-5 rounded-2xl font-black text-sm tracking-wide">BOOK FREE AUDIT</button>
-                <a href="#pricing" class="glass-card px-12 py-5 rounded-2xl font-black text-sm tracking-wide">VIEW PRICING</a>
+            <p class="text-gray-400 text-lg mb-12 max-w-2xl mx-auto">Premium digital marketing systems by Rana Khalid's team.</p>
+            <div class="flex flex-wrap justify-center gap-5">
+                <button onclick="toggleModal('booking-modal')" class="btn-primary px-12 py-5 rounded-2xl font-black text-sm">BOOK FREE AUDIT</button>
             </div>
         </div>
     </section>
 
-    <!-- Stats Bar (New Addition) -->
+    <!-- Stats Bar -->
     <section class="py-12 px-6 container mx-auto">
         <div class="glass-card rounded-[40px] p-8 md:p-12 flex flex-wrap justify-around items-center gap-8 border border-white/5 shadow-2xl relative overflow-hidden">
             <div class="absolute top-0 right-0 p-4">
@@ -216,12 +208,10 @@
                 <h3 class="text-4xl md:text-5xl font-black text-white mb-2">4+</h3>
                 <p class="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Years Experience</p>
             </div>
-            <div class="hidden md:block w-px h-12 bg-white/5"></div>
             <div class="text-center">
                 <h3 class="text-4xl md:text-5xl font-black text-cyan-400 mb-2">50+</h3>
                 <p class="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Projects Completed</p>
             </div>
-            <div class="hidden md:block w-px h-12 bg-white/5"></div>
             <div class="text-center">
                 <h3 class="text-4xl md:text-5xl font-black text-white mb-2">100%</h3>
                 <p class="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Client Satisfaction</p>
@@ -236,20 +226,20 @@
             <p class="text-gray-500 text-xs font-bold uppercase tracking-[0.3em]">Click on any member to chat</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Member 1 -->
-            <div onclick="showMember('RK', 'Rana Khalid', 'Founder & CEO', '5+ years experience scaling E-commerce brands. Click to start a strategy call.')" class="glass-card p-10 rounded-[40px] text-center">
+            <!-- Jab user niche cards pr click karega to modal khulega -->
+            <div onclick="showMember('RK', 'Rana Khalid', 'Founder & CEO', '5+ years experience scaling E-commerce brands. Expert in Growth Systems.')" class="glass-card p-10 rounded-[40px] text-center">
                 <div class="w-20 h-20 bg-cyan-500/20 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl font-black text-cyan-400 border border-cyan-500/30">RK</div>
                 <h4 class="text-xl font-bold">Rana Khalid</h4>
                 <p class="text-cyan-400 text-[10px] font-bold uppercase tracking-widest mt-1">Founder & CEO</p>
             </div>
-            <!-- Member 2 -->
-            <div onclick="showMember('AM', 'Ali Murad', 'Ads Specialist', 'Certified Meta Ads Expert. ROAS specialist for dropshipping stores.')" class="glass-card p-10 rounded-[40px] text-center">
+            
+            <div onclick="showMember('AM', 'Ali Murad', 'Ads Specialist', 'Certified Meta Ads Expert. Specialist in dropshipping ROAS optimization.')" class="glass-card p-10 rounded-[40px] text-center">
                 <div class="w-20 h-20 bg-purple-500/20 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl font-black text-purple-400 border border-purple-500/30">AM</div>
                 <h4 class="text-xl font-bold">Ali Murad</h4>
                 <p class="text-purple-400 text-[10px] font-bold uppercase tracking-widest mt-1">Ads Specialist</p>
             </div>
-            <!-- Member 3 -->
-            <div onclick="showMember('SA', 'Sarah Ahmed', 'UI/UX Lead', 'Designing high-converting sales pages that turn visitors into customers.')" class="glass-card p-10 rounded-[40px] text-center">
+
+            <div onclick="showMember('SA', 'Sarah Ahmed', 'UI/UX Lead', 'Creating high-converting landing pages that double your sales.')" class="glass-card p-10 rounded-[40px] text-center">
                 <div class="w-20 h-20 bg-pink-500/20 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl font-black text-pink-400 border border-pink-500/30">SA</div>
                 <h4 class="text-xl font-bold">Sarah Ahmed</h4>
                 <p class="text-pink-400 text-[10px] font-bold uppercase tracking-widest mt-1">UI/UX Designer</p>
@@ -257,90 +247,15 @@
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="py-24 px-6 container mx-auto">
-        <div class="text-center mb-20">
-            <h2 class="text-4xl font-black uppercase tracking-tighter mb-4">Pricing <span class="text-cyan-400">Plans</span></h2>
-        </div>
-        <div class="grid md:grid-cols-3 gap-8">
-            <!-- Starter -->
-            <div class="glass-card p-10 rounded-[40px]">
-                <h3 class="text-xl font-bold">Starter</h3>
-                <div class="text-4xl font-black my-6">$199<span class="text-sm font-normal text-gray-500">/mo</span></div>
-                <ul class="space-y-4 mb-8 text-sm text-gray-400">
-                    <li><i class="fas fa-check text-cyan-400 mr-2"></i> Social Media Management</li>
-                    <li><i class="fas fa-check text-cyan-400 mr-2"></i> 8 Professional Posts</li>
-                </ul>
-                <a href="https://wa.me/923024405533?text=Hi, I want to discuss the Starter Plan." class="block text-center py-4 border border-white/10 rounded-2xl font-bold">Order Now</a>
-            </div>
-            <!-- Growth (Featured) -->
-            <div class="glass-card p-10 rounded-[40px] border-2 border-cyan-500 transform scale-105 bg-cyan-500/5">
-                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-cyan-500 text-white text-[10px] px-4 py-1 rounded-full font-black uppercase">Most Popular</div>
-                <h3 class="text-xl font-bold">Growth</h3>
-                <div class="text-4xl font-black my-6 text-cyan-400">$499<span class="text-sm font-normal text-gray-400">/mo</span></div>
-                <ul class="space-y-4 mb-8 text-sm text-gray-300">
-                    <li><i class="fas fa-check text-cyan-400 mr-2"></i> Meta Ads Expert</li>
-                    <li><i class="fas fa-check text-cyan-400 mr-2"></i> Full SEO Strategy</li>
-                </ul>
-                <a href="https://wa.me/923024405533?text=Hi, I want to discuss the Growth Plan." class="block text-center py-4 btn-primary rounded-2xl font-bold text-white">Scale Now</a>
-            </div>
-            <!-- Elite -->
-            <div class="glass-card p-10 rounded-[40px]">
-                <h3 class="text-xl font-bold">Elite</h3>
-                <div class="text-4xl font-black my-6">$999<span class="text-sm font-normal text-gray-500">/mo</span></div>
-                <ul class="space-y-4 mb-8 text-sm text-gray-400">
-                    <li><i class="fas fa-check text-cyan-400 mr-2"></i> Video Production</li>
-                    <li><i class="fas fa-check text-cyan-400 mr-2"></i> Omnichannel Ads</li>
-                </ul>
-                <a href="https://wa.me/923024405533?text=Hi, I want to discuss the Elite Plan." class="block text-center py-4 border border-white/10 rounded-2xl font-bold">Get Quote</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Success Roadmap -->
-    <section class="py-24 px-6 container mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl font-black uppercase tracking-tighter">Our <span class="text-cyan-400">Success</span> Process</h2>
-        </div>
-        <div class="grid md:grid-cols-4 gap-6">
-            <div class="text-center p-6">
-                <div class="text-5xl font-black text-white/10 mb-4">01</div>
-                <h4 class="font-bold mb-2">Audit</h4>
-                <p class="text-xs text-gray-500 uppercase font-bold tracking-widest">Identifying Growth Leaks</p>
-            </div>
-            <div class="text-center p-6">
-                <div class="text-5xl font-black text-white/10 mb-4">02</div>
-                <h4 class="font-bold mb-2">Strategy</h4>
-                <p class="text-xs text-gray-500 uppercase font-bold tracking-widest">Revenue focused Blueprint</p>
-            </div>
-            <div class="text-center p-6">
-                <div class="text-5xl font-black text-white/10 mb-4">03</div>
-                <h4 class="font-bold mb-2">Execution</h4>
-                <p class="text-xs text-gray-500 uppercase font-bold tracking-widest">Agile Campaign Launch</p>
-            </div>
-            <div class="text-center p-6">
-                <div class="text-5xl font-black text-white/10 mb-4">04</div>
-                <h4 class="font-bold mb-2">Scale</h4>
-                <p class="text-xs text-gray-500 uppercase font-bold tracking-widest">Maximizing Profits</p>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer class="py-16 text-center border-t border-white/5">
-        <div class="flex justify-center gap-8 mb-10 text-gray-500 text-xl">
-            <a href="https://www.facebook.com/profile.php?id=61586002657915" target="_blank"><i class="fab fa-facebook hover:text-cyan-400"></i></a>
-            <a href="https://www.linkedin.com/in/rana-khalid-a51969384/" target="_blank"><i class="fab fa-linkedin hover:text-cyan-400"></i></a>
-            <a href="https://wa.me/923024405533" target="_blank"><i class="fab fa-whatsapp hover:text-cyan-400"></i></a>
-        </div>
         <div class="text-[10px] text-gray-700 font-black uppercase tracking-[0.6em]">
             © 2026 DIGIPULSEX | BY RANA KHALID
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script>
-        // Tawk.to Integration
+        // Tawk.to Live Chat (Aapki Key)
         var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
         (function(){
             var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
@@ -351,36 +266,28 @@
             s0.parentNode.insertBefore(s1,s0);
         })();
 
-        // Live Notifications Logic
-        const messages = [
-            "Someone from USA just booked a Free Audit",
-            "A new client from Dubai signed Elite Plan",
-            "Growth Plan ordered by a store in UK",
-            "Rana Khalid just finished a strategy session",
-            "New success story: +300% ROAS for E-com Brand",
-            "12 people are viewing the Pricing page right now",
-            "Someone from Pakistan just joined the waitlist"
-        ];
-
-        function showNotification() {
-            const toast = document.getElementById('notification-toast');
-            const textElem = document.getElementById('notif-text');
+        // Member Pop-up Logic
+        function showMember(icon, name, role, bio) {
+            // Modal mein data bharo
+            document.getElementById('member-icon').innerText = icon;
+            document.getElementById('member-name').innerText = name;
+            document.getElementById('member-role').innerText = role;
+            document.getElementById('member-bio').innerText = bio;
             
-            // Random message pick
-            textElem.innerText = messages[Math.floor(Math.random() * messages.length)];
+            // WhatsApp Button update karo (Custom message k sath)
+            const waBtn = document.getElementById('chat-whatsapp-btn');
+            waBtn.onclick = () => {
+                const message = encodeURIComponent(`Hi, I saw ${name} on DigipulseX. I want to discuss ${role} services.`);
+                window.open(`https://wa.me/923024405533?text=${message}`, '_blank');
+            };
             
-            // Show
-            toast.classList.add('active');
-            
-            // Hide after 4 seconds
-            setTimeout(() => {
-                toast.classList.remove('active');
-            }, 4000);
+            // Modal show kar do
+            toggleModal('team-modal');
         }
 
-        // Start notification loop
-        setInterval(showNotification, 15000);
-        setTimeout(showNotification, 5000);
+        function toggleModal(id) {
+            document.getElementById(id).classList.toggle('active');
+        }
 
         function openLiveChat() {
             if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
@@ -390,37 +297,22 @@
             }
         }
 
-        function toggleModal(id) {
-            document.getElementById(id).classList.toggle('active');
+        // Notifications
+        const messages = ["New Audit Booked!", "Someone from UK joined!", "Rana is Online", "New Project Started"];
+        function showNotification() {
+            const toast = document.getElementById('notification-toast');
+            document.getElementById('notif-text').innerText = messages[Math.floor(Math.random() * messages.length)];
+            toast.classList.add('active');
+            setTimeout(() => toast.classList.remove('active'), 4000);
         }
+        setInterval(showNotification, 15000);
 
-        function showMember(icon, name, role, bio) {
-            document.getElementById('member-icon').innerText = icon;
-            document.getElementById('member-name').innerText = name;
-            document.getElementById('member-role').innerText = role;
-            document.getElementById('member-bio').innerText = bio;
-            
-            const waBtn = document.getElementById('chat-whatsapp-btn');
-            waBtn.onclick = () => {
-                window.open(`https://wa.me/923024405533?text=Hi, I want to chat with ${name} (${role}) regarding DigipulseX services.`, '_blank');
-            };
-            
-            toggleModal('team-modal');
-        }
-
-        // Live Visitor Counter
-        setInterval(() => {
-            const count = Math.floor(Math.random() * (160 - 145 + 1)) + 145;
-            const elem = document.getElementById('visitor-count');
-            if(elem) elem.innerText = count;
-        }, 5000);
-
+        // Click outside modal to close
         window.onclick = function(e) {
-            if (e.target.className && typeof e.target.className === 'string' && e.target.className.includes('custom-modal')) {
+            if (e.target.className && e.target.className.includes('custom-modal')) {
                 e.target.classList.remove('active');
             }
         }
     </script>
-
 </body>
 </html>
