@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigipulseX | Expert Team & Growth</title>
+    <title>DigipulseX | Expert Team & Payments</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -68,6 +68,7 @@
             background: linear-gradient(90deg, #06b6d4, #3b82f6);
             border: none;
             cursor: pointer;
+            text-decoration: none;
         }
         
         .btn-hire i {
@@ -94,6 +95,19 @@
         .glass-card:hover { 
             border-color: rgba(34, 211, 238, 0.3);
             transform: translateY(-5px);
+        }
+
+        /* PAYMENT MODAL */
+        #payment-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
 
         .expert-gradient {
@@ -139,6 +153,56 @@
         </div>
     </div>
 
+    <!-- PAYMENT MODAL -->
+    <div id="payment-modal">
+        <div class="glass-card max-w-lg w-full p-8 relative border-2 border-cyan-500/50">
+            <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <h2 class="text-3xl font-black uppercase mb-2 tracking-tighter">Secure <span class="text-cyan-400">Payment</span></h2>
+            <p id="selected-plan-text" class="text-slate-400 text-sm mb-8 font-bold uppercase tracking-widest">Plan: Starter ($299)</p>
+            
+            <div class="space-y-4 mb-8">
+                <!-- EasyPaisa -->
+                <div class="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/10 hover:border-cyan-400/50 transition-all">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center text-green-400">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-slate-500 uppercase">Easypaisa</p>
+                            <p class="font-bold">0302-4405533</p>
+                        </div>
+                    </div>
+                    <button onclick="copyToClipboard('03024405533')" class="text-cyan-400 text-xs font-bold uppercase">Copy</button>
+                </div>
+                <!-- JazzCash -->
+                <div class="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/10 hover:border-cyan-400/50 transition-all">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-red-500/20 rounded-full flex items-center justify-center text-red-400">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-slate-500 uppercase">JazzCash</p>
+                            <p class="font-bold">0302-4405533</p>
+                        </div>
+                    </div>
+                    <button onclick="copyToClipboard('03024405533')" class="text-cyan-400 text-xs font-bold uppercase">Copy</button>
+                </div>
+            </div>
+
+            <div class="bg-cyan-500/10 p-4 rounded-2xl mb-8 border border-cyan-500/20">
+                <p class="text-xs text-cyan-400 leading-relaxed font-medium">
+                    <i class="fas fa-info-circle mr-2"></i> Pehle payment transfer karein, phir niche diye gaye button par click karke screenshot bhejien.
+                </p>
+            </div>
+
+            <a href="https://wa.me/923024405533?text=Hi%2C%20I%20have%20made%20the%20payment.%20Here%20is%20the%20screenshot." target="_blank" class="btn-hire w-full py-4 rounded-xl font-black uppercase text-white justify-center text-center">
+                I Have Paid, Send Screenshot <i class="fas fa-check-circle ml-2"></i>
+            </a>
+        </div>
+    </div>
+
     <!-- WHATSAPP FLOATING BUTTON -->
     <a href="https://wa.me/923024405533" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
@@ -147,14 +211,14 @@
     <!-- Navigation -->
     <nav class="p-6 border-b border-white/5 backdrop-blur-md sticky top-0 z-50 bg-[#020617]/90">
         <div class="container mx-auto flex justify-between items-center">
-            <div class="text-2xl font-black tracking-tighter">DIGIPULSE<span class="text-cyan-400">X</span></div>
+            <div class="text-2xl font-black tracking-tighter cursor-pointer" onclick="window.scrollTo(0,0)">DIGIPULSE<span class="text-cyan-400">X</span></div>
             <div class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-slate-400">
                 <a href="#pricing" class="hover:text-cyan-400">Pricing</a>
                 <a href="#team" class="hover:text-cyan-400">Team</a>
                 <a href="#expert" class="hover:text-cyan-400">Expert</a>
                 <a href="#contact" class="hover:text-cyan-400">Contact</a>
             </div>
-            <a href="https://wa.me/923024405533" class="btn-hire text-white px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">
+            <a href="https://wa.me/923024405533" target="_blank" class="btn-hire text-white px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">
                 Hire Me <i class="fas fa-arrow-right"></i>
             </a>
         </div>
@@ -169,6 +233,9 @@
             WE BUILD <span class="text-cyan-400">EMPIRES</span> <br> NOT JUST BRANDS
         </h1>
         <p class="text-slate-400 max-w-2xl mx-auto text-lg mb-12">Expert digital scaling strategies by Rana Khalid and his elite team.</p>
+        <a href="#pricing" class="btn-hire text-white px-12 py-5 rounded-full font-black text-xs uppercase tracking-widest shadow-xl">
+            Start Your Journey <i class="fas fa-arrow-right"></i>
+        </a>
     </section>
 
     <!-- PRICING SECTION -->
@@ -178,7 +245,7 @@
             <p class="text-slate-500 font-bold uppercase tracking-widest text-xs">Choose the best plan for your growth</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Plans remain same as requested -->
+            <!-- Starter Plan -->
             <div class="glass-card p-10 flex flex-col">
                 <h3 class="text-xl font-black mb-2 uppercase">Starter</h3>
                 <div class="text-4xl font-black text-cyan-400 mb-6">$299<span class="text-xs text-slate-500 font-normal">/mo</span></div>
@@ -186,8 +253,9 @@
                     <li><i class="fas fa-check text-cyan-400 mr-2"></i> Social Media Management</li>
                     <li><i class="fas fa-check text-cyan-400 mr-2"></i> 2 Meta Ad Campaigns</li>
                 </ul>
-                <button class="w-full py-4 bg-white/5 border border-white/10 rounded-2xl font-bold hover:bg-white hover:text-black transition-all">Get Started</button>
+                <button onclick="openModal('Starter Plan', '$299')" class="w-full py-4 bg-white/5 border border-white/10 rounded-2xl font-bold hover:bg-white hover:text-black transition-all text-center uppercase text-xs tracking-widest">Get Started</button>
             </div>
+            <!-- Growth Plan (Popular) -->
             <div class="glass-card p-10 flex flex-col pricing-popular bg-slate-900/80 transform md:scale-105">
                 <h3 class="text-xl font-black mb-2 uppercase">Growth</h3>
                 <div class="text-4xl font-black text-cyan-400 mb-6">$599<span class="text-xs text-slate-500 font-normal">/mo</span></div>
@@ -196,8 +264,9 @@
                     <li><i class="fas fa-check text-cyan-400 mr-2"></i> Unlimited Meta Ads</li>
                     <li><i class="fas fa-check text-cyan-400 mr-2"></i> Priority WhatsApp Support</li>
                 </ul>
-                <button class="btn-hire w-full py-4 rounded-2xl font-bold justify-center text-white">Choose Growth <i class="fas fa-arrow-right"></i></button>
+                <button onclick="openModal('Growth Plan', '$599')" class="btn-hire w-full py-4 rounded-2xl font-bold justify-center text-white text-center uppercase text-xs tracking-widest">Choose Growth <i class="fas fa-arrow-right"></i></button>
             </div>
+            <!-- Elite Plan -->
             <div class="glass-card p-10 flex flex-col">
                 <h3 class="text-xl font-black mb-2 uppercase">Elite</h3>
                 <div class="text-4xl font-black text-cyan-400 mb-6">$999<span class="text-xs text-slate-500 font-normal">/mo</span></div>
@@ -205,7 +274,7 @@
                     <li><i class="fas fa-check text-cyan-400 mr-2"></i> E-commerce Domination</li>
                     <li><i class="fas fa-check text-cyan-400 mr-2"></i> 24/7 Dedicated Manager</li>
                 </ul>
-                <button class="w-full py-4 bg-white/5 border border-white/10 rounded-2xl font-bold hover:bg-white hover:text-black transition-all">Go Elite</button>
+                <button onclick="openModal('Elite Plan', '$999')" class="w-full py-4 bg-white/5 border border-white/10 rounded-2xl font-bold hover:bg-white hover:text-black transition-all text-center uppercase text-xs tracking-widest">Go Elite</button>
             </div>
         </div>
     </section>
@@ -239,61 +308,30 @@
     <!-- THE EXPERT SECTION -->
     <section id="expert" class="py-24 container mx-auto px-6">
         <div class="glass-card p-10 md:p-20 flex flex-col md:flex-row items-center gap-16">
-            <div class="flex-1">
+            <div class="flex-1 text-center md:text-left">
                 <h2 class="text-5xl font-black mb-8 uppercase leading-none">Rana Khalid <br><span class="expert-gradient">The Expert</span></h2>
                 <p class="text-slate-400 text-lg mb-8">Digital Specialist focused on high-conversion strategies and global brand building.</p>
-                <a href="https://wa.me/923024405533" class="btn-hire px-12 py-5 rounded-full font-black text-xs uppercase tracking-widest text-white">
+                <a href="https://wa.me/923024405533" target="_blank" class="btn-hire px-12 py-5 rounded-full font-black text-xs uppercase tracking-widest text-white">
                     Talk To Me <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- CONTACT SECTION (Enhanced) -->
+    <!-- CONTACT SECTION -->
     <section id="contact" class="py-24 px-6 bg-slate-900/40">
-        <div class="container mx-auto max-w-5xl">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-4">Get In <span class="text-cyan-400">Touch</span></h2>
-                <p class="text-slate-500 font-bold uppercase tracking-widest text-xs">Let's discuss your next big project</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div class="space-y-8">
-                    <div class="flex items-center gap-6 glass-card p-6">
-                        <div class="w-12 h-12 bg-cyan-500/20 rounded-full flex items-center justify-center text-cyan-400">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div>
-                            <p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Phone</p>
-                            <p class="text-xl font-bold">0302-4405533</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-6 glass-card p-6">
-                        <div class="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center text-blue-400">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div>
-                            <p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Email</p>
-                            <p class="text-xl font-bold text-sm md:text-xl">khalidsahib2002@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-6 glass-card p-6">
-                        <div class="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center text-purple-400">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div>
-                            <p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Location</p>
-                            <p class="text-xl font-bold">Kamoke, Pakistan</p>
-                        </div>
-                    </div>
+        <div class="container mx-auto max-w-5xl text-center">
+            <h2 class="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-4">Need <span class="text-cyan-400">Help?</span></h2>
+            <p class="text-slate-500 font-bold uppercase tracking-widest text-xs mb-12">Instant support available</p>
+            <div class="flex flex-col md:flex-row gap-6 justify-center">
+                <div class="glass-card p-8 flex-1">
+                    <i class="fas fa-phone text-cyan-400 text-3xl mb-4"></i>
+                    <p class="text-xl font-bold">0302-4405533</p>
                 </div>
-                
-                <form class="glass-card p-8 space-y-4" onsubmit="event.preventDefault()">
-                    <input type="text" placeholder="Full Name" class="w-full bg-slate-950/50 border border-white/10 p-4 rounded-xl focus:outline-none focus:border-cyan-400 transition-all">
-                    <input type="email" placeholder="Email Address" class="w-full bg-slate-950/50 border border-white/10 p-4 rounded-xl focus:outline-none focus:border-cyan-400 transition-all">
-                    <textarea placeholder="Your Message" rows="4" class="w-full bg-slate-950/50 border border-white/10 p-4 rounded-xl focus:outline-none focus:border-cyan-400 transition-all"></textarea>
-                    <button class="btn-hire w-full py-4 rounded-xl font-black uppercase text-white justify-center">Send Inquiry <i class="fas fa-arrow-right"></i></button>
-                </form>
+                <div class="glass-card p-8 flex-1">
+                    <i class="fab fa-whatsapp text-green-400 text-3xl mb-4"></i>
+                    <p class="text-xl font-bold">WhatsApp Expert</p>
+                </div>
             </div>
         </div>
     </section>
@@ -301,7 +339,7 @@
     <!-- Footer -->
     <footer class="py-12 border-t border-white/5 text-center">
         <p class="text-[10px] font-black uppercase tracking-[0.5em] text-slate-500">
-            © 2026 DIGIPULSEX | <span class="text-cyan-400">Rana Khalid & Muhammad Ali</span>
+            © 2026 DIGIPULSEX | <span class="text-cyan-400">Rana Khalid</span>
         </p>
     </footer>
 
@@ -311,6 +349,42 @@
             setTimeout(() => {
                 document.getElementById('entry-page').style.display = 'none';
             }, 800);
+        }
+
+        function openModal(plan, price) {
+            document.getElementById('payment-modal').style.display = 'flex';
+            document.getElementById('selected-plan-text').innerText = `Plan: ${plan} (${price})`;
+        }
+
+        function closeModal() {
+            document.getElementById('payment-modal').style.display = 'none';
+        }
+
+        function copyToClipboard(text) {
+            const tempInput = document.createElement("input");
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            
+            // Custom simple notification (non-blocking)
+            const btn = event.target;
+            const originalText = btn.innerText;
+            btn.innerText = "COPIED!";
+            btn.classList.add("text-white");
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.classList.remove("text-white");
+            }, 2000);
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            const modal = document.getElementById('payment-modal');
+            if (event.target == modal) {
+                closeModal();
+            }
         }
     </script>
 </body>
