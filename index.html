@@ -36,18 +36,21 @@
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
         }
 
         .glass-card:hover {
             border-color: var(--cyan);
-            transform: scale(1.05);
             box-shadow: 0 20px 40px rgba(34, 211, 238, 0.15);
         }
 
         .btn-primary {
             background: linear-gradient(90deg, #22d3ee, #6366f1);
             box-shadow: 0 10px 20px rgba(34, 211, 238, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(34, 211, 238, 0.5);
         }
 
         .live-dot {
@@ -99,13 +102,18 @@
             transition: border 0.3s;
         }
         .form-input:focus { border-color: var(--cyan); }
+
+        .price-card.featured {
+            border: 2px solid var(--cyan);
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
 
     <div class="bg-glow"></div>
 
-    <!-- Live Notification -->
+    <!-- Live Notifications -->
     <div id="notification-toast">
         <div class="glass-card flex items-center gap-4 p-4 rounded-2xl border-l-4 border-l-cyan-400 min-w-[300px]">
             <div class="w-10 h-10 bg-cyan-500/20 rounded-full flex items-center justify-center text-cyan-400">
@@ -127,7 +135,7 @@
             <h3 class="text-3xl font-black mb-2 uppercase tracking-tighter text-cyan-400">Schedule Audit</h3>
             <p class="text-gray-400 text-sm mb-8">Slot book karein, Rana Khalid ki team rabta karegi.</p>
             
-            <form action="#" class="space-y-5">
+            <form onsubmit="event.preventDefault(); alert('Booking Received! We will contact you on WhatsApp.'); toggleModal('booking-modal');" class="space-y-5">
                 <input type="text" placeholder="Full Name" class="form-input" required>
                 <input type="tel" placeholder="WhatsApp Number" class="form-input" required>
                 <select class="form-input">
@@ -140,7 +148,7 @@
         </div>
     </div>
 
-    <!-- Team Member Pop-up Modal (Yahi wo cheez hai jo click par khulti hai) -->
+    <!-- Team Member Modal -->
     <div id="team-modal" class="custom-modal">
         <div class="glass-card max-w-md w-full p-10 rounded-[40px] relative border border-cyan-500/30 text-center cursor-default">
             <button onclick="toggleModal('team-modal')" class="absolute top-8 right-8 text-gray-400 hover:text-white">
@@ -172,10 +180,7 @@
             <div class="hidden md:flex gap-8 items-center text-[11px] font-bold tracking-widest uppercase">
                 <a href="#team" class="hover:text-cyan-400 transition">Our People</a>
                 <a href="#pricing" class="hover:text-cyan-400 transition">Pricing</a>
-                <div class="bg-white/5 px-4 py-2 rounded-full flex items-center gap-2 border border-white/10">
-                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                    <span class="text-[9px] text-gray-400"><span id="visitor-count">151</span> Active Now</span>
-                </div>
+                <a href="#faq" class="hover:text-cyan-400 transition">FAQ</a>
                 <button onclick="openLiveChat()" class="btn-primary px-6 py-2.5 rounded-full text-white flex items-center">
                     <span class="live-dot"></span> Let's Talk
                 </button>
@@ -189,32 +194,9 @@
             <h1 class="text-6xl md:text-8xl font-black mb-8 tracking-tighter leading-[0.9] uppercase">
                 Scale Your <br> <span class="text-cyan-400">Business.</span>
             </h1>
-            <p class="text-gray-400 text-lg mb-12 max-w-2xl mx-auto">Premium digital marketing systems by Rana Khalid's team.</p>
+            <p class="text-gray-400 text-lg mb-12 max-w-2xl mx-auto italic">"Hamara maqsad aapke brand ko zero se hero banana hai." - Rana Khalid</p>
             <div class="flex flex-wrap justify-center gap-5">
                 <button onclick="toggleModal('booking-modal')" class="btn-primary px-12 py-5 rounded-2xl font-black text-sm">BOOK FREE AUDIT</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Bar -->
-    <section class="py-12 px-6 container mx-auto">
-        <div class="glass-card rounded-[40px] p-8 md:p-12 flex flex-wrap justify-around items-center gap-8 border border-white/5 shadow-2xl relative overflow-hidden">
-            <div class="absolute top-0 right-0 p-4">
-                <span class="bg-green-500/10 border border-green-500/30 text-green-400 text-[10px] px-3 py-1 rounded-full font-black animate-pulse">
-                    <i class="fas fa-arrow-up mr-1"></i> +124.5% GROWTH
-                </span>
-            </div>
-            <div class="text-center">
-                <h3 class="text-4xl md:text-5xl font-black text-white mb-2">4+</h3>
-                <p class="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Years Experience</p>
-            </div>
-            <div class="text-center">
-                <h3 class="text-4xl md:text-5xl font-black text-cyan-400 mb-2">50+</h3>
-                <p class="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Projects Completed</p>
-            </div>
-            <div class="text-center">
-                <h3 class="text-4xl md:text-5xl font-black text-white mb-2">100%</h3>
-                <p class="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Client Satisfaction</p>
             </div>
         </div>
     </section>
@@ -223,23 +205,22 @@
     <section id="team" class="py-24 px-6 container mx-auto">
         <div class="text-center mb-16">
             <h2 class="text-4xl font-black uppercase tracking-tighter mb-4">The <span class="text-cyan-400">Experts</span></h2>
-            <p class="text-gray-500 text-xs font-bold uppercase tracking-[0.3em]">Click on any member to chat</p>
+            <p class="text-gray-500 text-xs font-bold uppercase tracking-[0.3em]">Direct contact with our specialists</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Jab user niche cards pr click karega to modal khulega -->
-            <div onclick="showMember('RK', 'Rana Khalid', 'Founder & CEO', '5+ years experience scaling E-commerce brands. Expert in Growth Systems.')" class="glass-card p-10 rounded-[40px] text-center">
+            <div onclick="showMember('RK', 'Rana Khalid', 'Founder & CEO', '5+ years experience scaling E-commerce brands. Expert in Growth Systems.')" class="glass-card p-10 rounded-[40px] text-center cursor-pointer hover:scale-105 transition-all">
                 <div class="w-20 h-20 bg-cyan-500/20 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl font-black text-cyan-400 border border-cyan-500/30">RK</div>
                 <h4 class="text-xl font-bold">Rana Khalid</h4>
                 <p class="text-cyan-400 text-[10px] font-bold uppercase tracking-widest mt-1">Founder & CEO</p>
             </div>
             
-            <div onclick="showMember('AM', 'Ali Murad', 'Ads Specialist', 'Certified Meta Ads Expert. Specialist in dropshipping ROAS optimization.')" class="glass-card p-10 rounded-[40px] text-center">
+            <div onclick="showMember('AM', 'Ali Murad', 'Ads Specialist', 'Certified Meta Ads Expert. Specialist in dropshipping ROAS optimization.')" class="glass-card p-10 rounded-[40px] text-center cursor-pointer hover:scale-105 transition-all">
                 <div class="w-20 h-20 bg-purple-500/20 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl font-black text-purple-400 border border-purple-500/30">AM</div>
                 <h4 class="text-xl font-bold">Ali Murad</h4>
                 <p class="text-purple-400 text-[10px] font-bold uppercase tracking-widest mt-1">Ads Specialist</p>
             </div>
 
-            <div onclick="showMember('SA', 'Sarah Ahmed', 'UI/UX Lead', 'Creating high-converting landing pages that double your sales.')" class="glass-card p-10 rounded-[40px] text-center">
+            <div onclick="showMember('SA', 'Sarah Ahmed', 'UI/UX Lead', 'Creating high-converting landing pages that double your sales.')" class="glass-card p-10 rounded-[40px] text-center cursor-pointer hover:scale-105 transition-all">
                 <div class="w-20 h-20 bg-pink-500/20 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl font-black text-pink-400 border border-pink-500/30">SA</div>
                 <h4 class="text-xl font-bold">Sarah Ahmed</h4>
                 <p class="text-pink-400 text-[10px] font-bold uppercase tracking-widest mt-1">UI/UX Designer</p>
@@ -247,15 +228,116 @@
         </div>
     </section>
 
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 px-6 bg-slate-900/30">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black uppercase tracking-tighter mb-4">Pricing <span class="text-cyan-400">Plans</span></h2>
+                <p class="text-gray-500 text-xs font-bold uppercase tracking-[0.3em]">Simple plans for massive growth</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Basic -->
+                <div class="glass-card p-10 rounded-[40px] border border-white/5 flex flex-col">
+                    <h4 class="text-xl font-bold mb-2">Growth</h4>
+                    <div class="text-4xl font-black mb-6">$499<span class="text-sm text-gray-500 font-normal">/mo</span></div>
+                    <ul class="space-y-4 mb-10 text-sm text-gray-400 flex-1">
+                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Social Media Management</li>
+                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Basic Ads Strategy</li>
+                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Weekly Reports</li>
+                    </ul>
+                    <button onclick="toggleModal('booking-modal')" class="w-full py-4 border border-white/10 rounded-2xl font-bold hover:bg-white hover:text-black transition-all text-sm uppercase">Get Started</button>
+                </div>
+
+                <!-- Featured -->
+                <div class="glass-card p-10 rounded-[40px] border-2 border-cyan-500 relative transform md:scale-110 shadow-2xl bg-slate-900 flex flex-col">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[10px] font-black px-4 py-1 rounded-full uppercase">Most Popular</div>
+                    <h4 class="text-xl font-bold mb-2">Scale Pro</h4>
+                    <div class="text-4xl font-black mb-6">$999<span class="text-sm text-gray-500 font-normal">/mo</span></div>
+                    <ul class="space-y-4 mb-10 text-sm text-gray-200 flex-1 font-semibold">
+                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Full Ads Management</li>
+                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Content Creation (15 Posts)</li>
+                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Sales Funnel Design</li>
+                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> 24/7 Priority Support</li>
+                    </ul>
+                    <button onclick="toggleModal('booking-modal')" class="w-full py-4 btn-primary rounded-2xl font-black text-sm uppercase">Choose Pro</button>
+                </div>
+
+                <!-- Enterprise -->
+                <div class="glass-card p-10 rounded-[40px] border border-white/5 flex flex-col">
+                    <h4 class="text-xl font-bold mb-2">Enterprise</h4>
+                    <div class="text-4xl font-black mb-6">Custom</div>
+                    <ul class="space-y-4 mb-10 text-sm text-gray-400 flex-1">
+                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Full Brand Ecosystem</li>
+                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Unlimited Ad Spend Mgmt</li>
+                        <li><i class="fas fa-check text-cyan-400 mr-2"></i> Dedicated Account Manager</li>
+                    </ul>
+                    <button onclick="openLiveChat()" class="w-full py-4 border border-white/10 rounded-2xl font-bold hover:bg-white hover:text-black transition-all text-sm uppercase">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 px-6 container mx-auto max-w-4xl">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-black uppercase tracking-tighter mb-4">Common <span class="text-cyan-400">Questions</span></h2>
+        </div>
+        <div class="space-y-4">
+            <details class="glass-card p-6 rounded-2xl cursor-pointer group">
+                <summary class="font-bold flex justify-between items-center list-none">
+                    Result kab tak milenge?
+                    <i class="fas fa-chevron-down text-cyan-400 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <p class="mt-4 text-gray-400 text-sm leading-relaxed">Pehle 14 dino mein hum data analyze karte hain. Results usually 30-45 dino mein stable hona shuru ho jate hain.</p>
+            </details>
+            <details class="glass-card p-6 rounded-2xl cursor-pointer group">
+                <summary class="font-bold flex justify-between items-center list-none">
+                    Ads Budget kitna hona chahiye?
+                    <i class="fas fa-chevron-down text-cyan-400 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <p class="mt-4 text-gray-400 text-sm leading-relaxed">Hum recommend karte hain ke kam az kam $10-$20 per day se start karein taake pixel ko acha data mil sake.</p>
+            </details>
+        </div>
+    </section>
+
     <!-- Footer -->
-    <footer class="py-16 text-center border-t border-white/5">
-        <div class="text-[10px] text-gray-700 font-black uppercase tracking-[0.6em]">
-            © 2026 DIGIPULSEX | BY RANA KHALID
+    <footer class="py-24 px-6 border-t border-white/5 bg-slate-950">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            <div class="col-span-1 md:col-span-2">
+                <div class="text-3xl font-black mb-6 tracking-tighter">DIGIPULSE<span class="text-cyan-400">X</span></div>
+                <p class="text-gray-500 max-w-sm mb-6 uppercase text-[10px] font-bold tracking-widest leading-loose">
+                    Rana Khalid's premium agency focusing on high-ticket client acquisition and e-commerce scaling.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 bg-white/5 flex items-center justify-center rounded-full hover:bg-cyan-500 hover:text-black transition-all"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="w-10 h-10 bg-white/5 flex items-center justify-center rounded-full hover:bg-cyan-500 hover:text-black transition-all"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="w-10 h-10 bg-white/5 flex items-center justify-center rounded-full hover:bg-cyan-500 hover:text-black transition-all"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div>
+                <h5 class="font-black uppercase text-xs tracking-[0.3em] mb-6">Quick Links</h5>
+                <ul class="space-y-3 text-sm text-gray-500 font-bold uppercase tracking-widest">
+                    <li><a href="#team" class="hover:text-white transition">The Experts</a></li>
+                    <li><a href="#pricing" class="hover:text-white transition">Pricing</a></li>
+                    <li><a href="#faq" class="hover:text-white transition">Questions</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-black uppercase text-xs tracking-[0.3em] mb-6">Support</h5>
+                <ul class="space-y-3 text-sm text-gray-500 font-bold uppercase tracking-widest">
+                    <li><a href="mailto:khalidsahib2002@gmail.com" class="hover:text-white transition">Email Us</a></li>
+                    <li><a href="https://wa.me/923024405533" class="hover:text-white transition">WhatsApp</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center text-[10px] text-gray-800 font-black uppercase tracking-[1em]">
+            © 2026 DIGIPULSEX | DESIGNED BY RANA KHALID
         </div>
     </footer>
 
     <script>
-        // Tawk.to Live Chat (Aapki Key)
+        // Tawk.to Live Chat
         var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
         (function(){
             var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
@@ -268,25 +350,22 @@
 
         // Member Pop-up Logic
         function showMember(icon, name, role, bio) {
-            // Modal mein data bharo
             document.getElementById('member-icon').innerText = icon;
             document.getElementById('member-name').innerText = name;
             document.getElementById('member-role').innerText = role;
             document.getElementById('member-bio').innerText = bio;
             
-            // WhatsApp Button update karo (Custom message k sath)
             const waBtn = document.getElementById('chat-whatsapp-btn');
             waBtn.onclick = () => {
                 const message = encodeURIComponent(`Hi, I saw ${name} on DigipulseX. I want to discuss ${role} services.`);
                 window.open(`https://wa.me/923024405533?text=${message}`, '_blank');
             };
-            
-            // Modal show kar do
             toggleModal('team-modal');
         }
 
         function toggleModal(id) {
-            document.getElementById(id).classList.toggle('active');
+            const modal = document.getElementById(id);
+            modal.classList.toggle('active');
         }
 
         function openLiveChat() {
@@ -297,17 +376,17 @@
             }
         }
 
-        // Notifications
-        const messages = ["New Audit Booked!", "Someone from UK joined!", "Rana is Online", "New Project Started"];
+        // Live Notifications
+        const messages = ["New Audit Booked by Ali!", "Ecom Surge Plan Ordered!", "Rana Khalid is now Live", "Someone from Dubai joined!", "ROAS +4.5x reported by client"];
         function showNotification() {
             const toast = document.getElementById('notification-toast');
             document.getElementById('notif-text').innerText = messages[Math.floor(Math.random() * messages.length)];
             toast.classList.add('active');
-            setTimeout(() => toast.classList.remove('active'), 4000);
+            setTimeout(() => toast.classList.remove('active'), 5000);
         }
-        setInterval(showNotification, 15000);
+        setInterval(showNotification, 12000);
 
-        // Click outside modal to close
+        // Click outside to close
         window.onclick = function(e) {
             if (e.target.className && e.target.className.includes('custom-modal')) {
                 e.target.classList.remove('active');
